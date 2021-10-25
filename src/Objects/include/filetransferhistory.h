@@ -6,13 +6,14 @@
 enum class FileTransferType {ONE_ONE = 0, AD_HOC = 1, PRE_DEFINED = 2};
 
 class FileTransferHistory : ProcessMessage {
-    public :
+    
+public :
 
-        HeaderContent headerContent {headersContent};
+    HeaderContent headerContent {content};
 
-        messageMap getHeadersContent(){ return headersContent;}
+    messageMap getHeadersContent();
 
-        XCPMContent xCPMContent;
+    XCPMContent xCPMContent;
         
 };
 

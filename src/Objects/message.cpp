@@ -1,13 +1,24 @@
 #include "message.h"
 
+header_string& header_string::operator=(string const &str){
+    mHeaderContent=str;
+    mAllContent[mHeaderName] = mHeaderContent;
+    return *this;
+};
 
-
-header_string &header_string::operator=(string const &s){
-        m_header_content=s;
-            m_headers_content[m_header_name] = m_header_content;
-            return *this;
-        };
-
-string header_string::get() {
-	return m_header_content;
+string header_string::getValue() {
+	return mHeaderContent;
 }
+
+/*string header_string::assign(string str) {
+    return mHeaderContent;
+}*/
+
+string Message::getName() { return FOLDERNAME;}
+uint32_t Message::getUID() { return UID;}
+uint32_t Message::getUIDValidity() { return UIDVALIDITY;}
+
+void Message::setName(string foldername) { FOLDERNAME=foldername;}
+void Message::setUID(uint32_t uid) { UID=uid;}
+void Message::setUIDValidity(uint32_t uidvalidity) { UIDVALIDITY=uidvalidity;}
+

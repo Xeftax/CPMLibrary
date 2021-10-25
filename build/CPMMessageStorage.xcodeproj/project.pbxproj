@@ -1,0 +1,1111 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 54;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		99A5F279F389426680944E5D /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 01B7A6D5715F4095B69D4F65 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				73D75F8DCCE62363153F032F /* Generate CMakeFiles/ZERO_CHECK */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+		D77002F62419423BA8E5935E /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 7B659F906C2747A785954485 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				0C3027BF6D27C6C63164E920 /* Generate CMakeFiles/ALL_BUILD */,
+			);
+			dependencies = (
+				D476E63926F64514BF24BA2D /* PBXTargetDependency */,
+				139A8A3E67C6483DAB7BFA93 /* PBXTargetDependency */,
+				229AF3B7F2D74D8DBFCD9ECD /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+		FA80595A2559413882063F6E /* package */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = ED98F16EF9E347ECB13C10E9 /* Build configuration list for PBXAggregateTarget "package" */;
+			buildPhases = (
+				571234464C2A5D0D43F1AB42 /* CMake PostBuild Rules */,
+			);
+			dependencies = (
+				D0D0EE8B6EC04AFCBC289F07 /* PBXTargetDependency */,
+			);
+			name = package;
+			productName = package;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		4680836E330446B1A139FC74 /* manualtest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 45006DE89F664991A519DE60 /* manualtest.cpp */; };
+		6328DDCC91AE4940B4BFDE1C /* message.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E5AD4E00D3144E41B42804A3 /* message.cpp */; };
+		6685487127256FB30025982C /* conversationhistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6685486F27256FB30025982C /* conversationhistory.cpp */; };
+		6685487D27257C120025982C /* filetransferhistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6685487C27257C120025982C /* filetransferhistory.cpp */; };
+		6685488427257C880025982C /* processmessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6685488327257C880025982C /* processmessage.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3BA1B6478C3448CB9E8FFB4C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 118E6DC714B64611ADD4402D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D9FCCB543414FFFB332BD7A;
+			remoteInfo = CPMMessageStorage;
+		};
+		4F6A1769C672449AA33E0F8E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 118E6DC714B64611ADD4402D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5D9FCCB543414FFFB332BD7A;
+			remoteInfo = CPMMessageStorage;
+		};
+		50911A57CBAC4AFD90E360BD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 118E6DC714B64611ADD4402D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 38ADA5DD801948C6BA693CBE;
+			remoteInfo = manueltest;
+		};
+		537E184B294C413EAFC63E9D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 118E6DC714B64611ADD4402D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 99A5F279F389426680944E5D;
+			remoteInfo = ZERO_CHECK;
+		};
+		6158221528284ECFAEC4DCA7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 118E6DC714B64611ADD4402D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D77002F62419423BA8E5935E;
+			remoteInfo = ALL_BUILD;
+		};
+		8BC85F85E8724907B9A100FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 118E6DC714B64611ADD4402D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 99A5F279F389426680944E5D;
+			remoteInfo = ZERO_CHECK;
+		};
+		B9FEFAED82D342BA83538819 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 118E6DC714B64611ADD4402D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 99A5F279F389426680944E5D;
+			remoteInfo = ZERO_CHECK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		25719F22246741B486E76F30 /* filetransferhistory.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = filetransferhistory.h; path = src/Objects/include/filetransferhistory.h; sourceTree = SOURCE_ROOT; };
+		3BEA6C15E4814472B269D9A6 /* sessioninfo.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = sessioninfo.h; path = src/Objects/include/sessioninfo.h; sourceTree = SOURCE_ROOT; };
+		45006DE89F664991A519DE60 /* manualtest.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = manualtest.cpp; path = tester/manualtest.cpp; sourceTree = SOURCE_ROOT; };
+		652DEE00F6174B06AC0AB606 /* read.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = read.h; path = src/Storage/include/read.h; sourceTree = SOURCE_ROOT; };
+		6582735DD9354C01A6C36B6B /* write.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = write.h; path = src/Storage/include/write.h; sourceTree = SOURCE_ROOT; };
+		6685486F27256FB30025982C /* conversationhistory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = conversationhistory.cpp; sourceTree = "<group>"; };
+		6685487C27257C120025982C /* filetransferhistory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = filetransferhistory.cpp; sourceTree = "<group>"; };
+		6685488327257C880025982C /* processmessage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = processmessage.cpp; sourceTree = "<group>"; };
+		6BF209E904434F5CA0F69905 /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		798CEE67006F466490170F5D /* media.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = media.h; path = src/Objects/include/media.h; sourceTree = SOURCE_ROOT; };
+		90B7C53BFA5F4DF7BA396725 /* message.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = message.h; path = src/Objects/include/message.h; sourceTree = SOURCE_ROOT; };
+		979618276BF54E689A79AA98 /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		A3921A18D867417191C6B3AE /* groupstate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = groupstate.h; path = src/Objects/include/groupstate.h; sourceTree = SOURCE_ROOT; };
+		B5153D462E564662ACB15DF1 /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		CB25E8D759A644799C32FDB5 /* conversationhistory.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = conversationhistory.h; path = src/Objects/include/conversationhistory.h; sourceTree = SOURCE_ROOT; };
+		E5AD4E00D3144E41B42804A3 /* message.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = message.cpp; path = src/Objects/message.cpp; sourceTree = SOURCE_ROOT; };
+		EE46BC22F7024265A267DEDB /* sessionhistory.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = sessionhistory.h; path = src/Objects/include/sessionhistory.h; sourceTree = SOURCE_ROOT; };
+		F17903EE06CA4690ABB14DCB /* libCPMMessageStorage.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libCPMMessageStorage.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		F4ABD25E32DC4E20950A4BD0 /* manueltest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; path = manueltest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5C0913F2EE541AE873E113C /* cpmobject.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = cpmobject.h; path = src/Objects/include/cpmobject.h; sourceTree = SOURCE_ROOT; };
+		F78AA357360A4EDBA09EB6A9 /* processmessage.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = processmessage.h; path = src/Objects/include/processmessage.h; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8B6387CCA5FF49B7B60A4308 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A615121070C3429485F794D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0E4B044D740A472B8B0F012E /* CPMMessageStorage */ = {
+			isa = PBXGroup;
+			children = (
+				3C85E8FAC0C6473B8E752BBF /* Source Files */,
+				E8D086CA007B4F26A87D8084 /* Header Files */,
+				B5153D462E564662ACB15DF1 /* CMakeLists.txt */,
+			);
+			name = CPMMessageStorage;
+			sourceTree = "<group>";
+		};
+		33E19BF852AE4D00A066DCC0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F17903EE06CA4690ABB14DCB /* libCPMMessageStorage.a */,
+				F4ABD25E32DC4E20950A4BD0 /* manueltest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3C85E8FAC0C6473B8E752BBF /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				E5AD4E00D3144E41B42804A3 /* message.cpp */,
+				6685486F27256FB30025982C /* conversationhistory.cpp */,
+				6685487C27257C120025982C /* filetransferhistory.cpp */,
+				6685488327257C880025982C /* processmessage.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		5D256FD14C2D43E19964843F /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				8ED2FF08F8984ECD820743BA /* CMake Rules */,
+				6BF209E904434F5CA0F69905 /* CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		7BA13F63A2D5499DB71E3D0D /* manueltest */ = {
+			isa = PBXGroup;
+			children = (
+				81EC16392C774953A0BC7BE1 /* Source Files */,
+				979618276BF54E689A79AA98 /* CMakeLists.txt */,
+			);
+			name = manueltest;
+			sourceTree = "<group>";
+		};
+		81EC16392C774953A0BC7BE1 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				45006DE89F664991A519DE60 /* manualtest.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		8ED2FF08F8984ECD820743BA /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+		9906CE97F18C4704A2B39B24 = {
+			isa = PBXGroup;
+			children = (
+				7BA13F63A2D5499DB71E3D0D /* manueltest */,
+				0E4B044D740A472B8B0F012E /* CPMMessageStorage */,
+				5D256FD14C2D43E19964843F /* ALL_BUILD */,
+				33E19BF852AE4D00A066DCC0 /* Products */,
+				F37DD9D389784B8B9BC4913F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E8D086CA007B4F26A87D8084 /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				CB25E8D759A644799C32FDB5 /* conversationhistory.h */,
+				F5C0913F2EE541AE873E113C /* cpmobject.h */,
+				25719F22246741B486E76F30 /* filetransferhistory.h */,
+				A3921A18D867417191C6B3AE /* groupstate.h */,
+				798CEE67006F466490170F5D /* media.h */,
+				90B7C53BFA5F4DF7BA396725 /* message.h */,
+				F78AA357360A4EDBA09EB6A9 /* processmessage.h */,
+				EE46BC22F7024265A267DEDB /* sessionhistory.h */,
+				3BEA6C15E4814472B269D9A6 /* sessioninfo.h */,
+				652DEE00F6174B06AC0AB606 /* read.h */,
+				6582735DD9354C01A6C36B6B /* write.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		F37DD9D389784B8B9BC4913F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		38ADA5DD801948C6BA693CBE /* manueltest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3DF359D384DE4B6787BA9C1B /* Build configuration list for PBXNativeTarget "manueltest" */;
+			buildPhases = (
+				374413262E694DAF9E7909CF /* Sources */,
+				8B6387CCA5FF49B7B60A4308 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0E48E597DCBB4E95B8E26393 /* PBXTargetDependency */,
+				E34B88B3661E40B6A4B59BD6 /* PBXTargetDependency */,
+			);
+			name = manueltest;
+			productName = manueltest;
+			productReference = F4ABD25E32DC4E20950A4BD0 /* manueltest */;
+			productType = "com.apple.product-type.tool";
+		};
+		5D9FCCB543414FFFB332BD7A /* CPMMessageStorage */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B2E9B598ACF4A7996AE3236 /* Build configuration list for PBXNativeTarget "CPMMessageStorage" */;
+			buildPhases = (
+				A5372D445708496A86F0F83D /* Sources */,
+				A615121070C3429485F794D7 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FD22FB468F454F989BC00092 /* PBXTargetDependency */,
+			);
+			name = CPMMessageStorage;
+			productName = CPMMessageStorage;
+			productReference = F17903EE06CA4690ABB14DCB /* libCPMMessageStorage.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		118E6DC714B64611ADD4402D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 1230;
+			};
+			buildConfigurationList = 43B4FA589C284267BAB57CDA /* Build configuration list for PBXProject "CPMMessageStorage" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9906CE97F18C4704A2B39B24;
+			projectDirPath = ../;
+			projectRoot = "";
+			targets = (
+				D77002F62419423BA8E5935E /* ALL_BUILD */,
+				5D9FCCB543414FFFB332BD7A /* CPMMessageStorage */,
+				99A5F279F389426680944E5D /* ZERO_CHECK */,
+				38ADA5DD801948C6BA693CBE /* manueltest */,
+				FA80595A2559413882063F6E /* package */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0C3027BF6D27C6C63164E920 /* Generate CMakeFiles/ALL_BUILD */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ALL_BUILD";
+			outputPaths = (
+				"/Users/quentin/Desktop/CPM message storage/CPMLibrary/build/CMakeFiles/ALL_BUILD",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nif test \"$CONFIGURATION\" = \"Debug\"; then :\n  cd \"/Users/quentin/Desktop/CPM message storage/CPMLibrary/build\"\n  echo Build\\ all\\ projects\nfi\nif test \"$CONFIGURATION\" = \"Release\"; then :\n  cd \"/Users/quentin/Desktop/CPM message storage/CPMLibrary/build\"\n  echo Build\\ all\\ projects\nfi\nif test \"$CONFIGURATION\" = \"MinSizeRel\"; then :\n  cd \"/Users/quentin/Desktop/CPM message storage/CPMLibrary/build\"\n  echo Build\\ all\\ projects\nfi\nif test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :\n  cd \"/Users/quentin/Desktop/CPM message storage/CPMLibrary/build\"\n  echo Build\\ all\\ projects\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		571234464C2A5D0D43F1AB42 /* CMake PostBuild Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake PostBuild Rules";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nif test \"$CONFIGURATION\" = \"Debug\"; then :\n  cd \"/Users/quentin/Desktop/CPM message storage/CPMLibrary/build\"\n  /usr/local/Cellar/cmake/3.21.3_1/bin/cpack -C $CONFIGURATION$EFFECTIVE_PLATFORM_NAME --config ./CPackConfig.cmake\nfi\nif test \"$CONFIGURATION\" = \"Release\"; then :\n  cd \"/Users/quentin/Desktop/CPM message storage/CPMLibrary/build\"\n  /usr/local/Cellar/cmake/3.21.3_1/bin/cpack -C $CONFIGURATION$EFFECTIVE_PLATFORM_NAME --config ./CPackConfig.cmake\nfi\nif test \"$CONFIGURATION\" = \"MinSizeRel\"; then :\n  cd \"/Users/quentin/Desktop/CPM message storage/CPMLibrary/build\"\n  /usr/local/Cellar/cmake/3.21.3_1/bin/cpack -C $CONFIGURATION$EFFECTIVE_PLATFORM_NAME --config ./CPackConfig.cmake\nfi\nif test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :\n  cd \"/Users/quentin/Desktop/CPM message storage/CPMLibrary/build\"\n  /usr/local/Cellar/cmake/3.21.3_1/bin/cpack -C $CONFIGURATION$EFFECTIVE_PLATFORM_NAME --config ./CPackConfig.cmake\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		73D75F8DCCE62363153F032F /* Generate CMakeFiles/ZERO_CHECK */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate CMakeFiles/ZERO_CHECK";
+			outputPaths = (
+				"/Users/quentin/Desktop/CPM message storage/CPMLibrary/build/CMakeFiles/ZERO_CHECK",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nif test \"$CONFIGURATION\" = \"Debug\"; then :\n  cd \"/Users/quentin/Desktop/CPM message storage/CPMLibrary/build\"\n  make -f /Users/quentin/Desktop/CPM\\ message\\ storage/CPMLibrary/build/CMakeScripts/ReRunCMake.make\nfi\nif test \"$CONFIGURATION\" = \"Release\"; then :\n  cd \"/Users/quentin/Desktop/CPM message storage/CPMLibrary/build\"\n  make -f /Users/quentin/Desktop/CPM\\ message\\ storage/CPMLibrary/build/CMakeScripts/ReRunCMake.make\nfi\nif test \"$CONFIGURATION\" = \"MinSizeRel\"; then :\n  cd \"/Users/quentin/Desktop/CPM message storage/CPMLibrary/build\"\n  make -f /Users/quentin/Desktop/CPM\\ message\\ storage/CPMLibrary/build/CMakeScripts/ReRunCMake.make\nfi\nif test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :\n  cd \"/Users/quentin/Desktop/CPM message storage/CPMLibrary/build\"\n  make -f /Users/quentin/Desktop/CPM\\ message\\ storage/CPMLibrary/build/CMakeScripts/ReRunCMake.make\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		374413262E694DAF9E7909CF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4680836E330446B1A139FC74 /* manualtest.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A5372D445708496A86F0F83D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6328DDCC91AE4940B4BFDE1C /* message.cpp in Sources */,
+				6685487127256FB30025982C /* conversationhistory.cpp in Sources */,
+				6685487D27257C120025982C /* filetransferhistory.cpp in Sources */,
+				6685488427257C880025982C /* processmessage.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0E48E597DCBB4E95B8E26393 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 99A5F279F389426680944E5D /* ZERO_CHECK */;
+			targetProxy = 537E184B294C413EAFC63E9D /* PBXContainerItemProxy */;
+		};
+		139A8A3E67C6483DAB7BFA93 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5D9FCCB543414FFFB332BD7A /* CPMMessageStorage */;
+			targetProxy = 4F6A1769C672449AA33E0F8E /* PBXContainerItemProxy */;
+		};
+		229AF3B7F2D74D8DBFCD9ECD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 38ADA5DD801948C6BA693CBE /* manueltest */;
+			targetProxy = 50911A57CBAC4AFD90E360BD /* PBXContainerItemProxy */;
+		};
+		D0D0EE8B6EC04AFCBC289F07 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D77002F62419423BA8E5935E /* ALL_BUILD */;
+			targetProxy = 6158221528284ECFAEC4DCA7 /* PBXContainerItemProxy */;
+		};
+		D476E63926F64514BF24BA2D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 99A5F279F389426680944E5D /* ZERO_CHECK */;
+			targetProxy = 8BC85F85E8724907B9A100FF /* PBXContainerItemProxy */;
+		};
+		E34B88B3661E40B6A4B59BD6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5D9FCCB543414FFFB332BD7A /* CPMMessageStorage */;
+			targetProxy = 3BA1B6478C3448CB9E8FFB4C /* PBXContainerItemProxy */;
+		};
+		FD22FB468F454F989BC00092 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 99A5F279F389426680944E5D /* ZERO_CHECK */;
+			targetProxy = B9FEFAED82D342BA83538819 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		02D0B194F8F7468498589413 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Release;
+		};
+		08ACD0708CB84F8CA61C0E48 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Release;
+		};
+		0CF234D50607453789F2B815 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/src/Objects/include\"",
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/src/Storage/include\"",
+					"$(inherited)",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "   '-std=gnu++17' ";
+				OTHER_LIBTOOLFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = CPMMessageStorage;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Debug;
+		};
+		0FFDF01C60134BA8A163707E /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = RelWithDebInfo;
+		};
+		13B900D439A04602893987ED /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk;
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build/build";
+			};
+			name = RelWithDebInfo;
+		};
+		1C40714162894CBE80712079 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = package;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = MinSizeRel;
+		};
+		1F75CBE1E3844D58ACB980E4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/src/Objects/include\"",
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/src/Storage/include\"",
+					"$(inherited)",
+				);
+				INSTALL_PATH = "";
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNDEBUG",
+					"'-std=gnu++17'",
+				);
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-Wl,-headerpad_max_install_names",
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/build/Release/libCPMMessageStorage.a\"",
+					"$(inherited)",
+				);
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = manueltest;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Release;
+		};
+		2B6B1242C51148C28C75C55B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = package;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Debug;
+		};
+		2F51AE23E5074BB3BAAB320A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Debug;
+		};
+		36136FBB75694145BCA1E000 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/src/Objects/include\"",
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/src/Storage/include\"",
+					"$(inherited)",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNDEBUG",
+					"'-std=gnu++17'",
+				);
+				OTHER_LIBTOOLFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = CPMMessageStorage;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Release;
+		};
+		364361AC3B0E43F899E6258D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Debug;
+		};
+		3DA6F2A01FA14B1EA9C1209B /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = RelWithDebInfo;
+		};
+		522B7020586E4E5C91F18E0A /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/src/Objects/include\"",
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/src/Storage/include\"",
+					"$(inherited)",
+				);
+				INSTALL_PATH = "";
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNDEBUG",
+					"'-std=gnu++17'",
+				);
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-Wl,-headerpad_max_install_names",
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/build/MinSizeRel/libCPMMessageStorage.a\"",
+					"$(inherited)",
+				);
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = manueltest;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = MinSizeRel;
+		};
+		63C3A4BE7AF44F6394C84D90 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/src/Objects/include\"",
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/src/Storage/include\"",
+					"$(inherited)",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNDEBUG",
+					"'-std=gnu++17'",
+				);
+				OTHER_LIBTOOLFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = CPMMessageStorage;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = MinSizeRel;
+		};
+		673F58FC0D594A898195C3B8 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/src/Objects/include\"",
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/src/Storage/include\"",
+					"$(inherited)",
+				);
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNDEBUG",
+					"'-std=gnu++17'",
+				);
+				OTHER_LIBTOOLFLAGS = "";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = CPMMessageStorage;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = RelWithDebInfo;
+		};
+		68374AB7901D471D8596A7A7 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = package;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = RelWithDebInfo;
+		};
+		698DBC3DAC82496FA3C1EDE4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk;
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build/build";
+			};
+			name = Release;
+		};
+		7F070732F6C64CA68EC50022 /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 2;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/src/Objects/include\"",
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/src/Storage/include\"",
+					"$(inherited)",
+				);
+				INSTALL_PATH = "";
+				OTHER_CPLUSPLUSFLAGS = (
+					"-DNDEBUG",
+					"'-std=gnu++17'",
+				);
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-Wl,-headerpad_max_install_names",
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/build/RelWithDebInfo/libCPMMessageStorage.a\"",
+					"$(inherited)",
+				);
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = manueltest;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = RelWithDebInfo;
+		};
+		8DCF22F529C243638636364B /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk;
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build/build";
+			};
+			name = MinSizeRel;
+		};
+		BF2E2249DAEE4C589FFB508B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = package;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Release;
+		};
+		CB74F352D1BD4F8294F95A96 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = MinSizeRel;
+		};
+		D75FF7FCB2F648CC9E51C4F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.1.sdk;
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build/build";
+			};
+			name = Debug;
+		};
+		E409AC5527EC436DBC52CFA8 /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " $(inherited)";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = MinSizeRel;
+		};
+		E6128791BC8E48DCAA461DE3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				EXECUTABLE_PREFIX = "";
+				EXECUTABLE_SUFFIX = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = (
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/src/Objects/include\"",
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/src/Storage/include\"",
+					"$(inherited)",
+				);
+				INSTALL_PATH = "";
+				OTHER_CPLUSPLUSFLAGS = "   '-std=gnu++17' ";
+				OTHER_LDFLAGS = (
+					"-Wl,-search_paths_first",
+					"-Wl,-headerpad_max_install_names",
+					"\"/Users/quentin/Desktop/CPM message storage/CPMLibrary/build/Debug/libCPMMessageStorage.a\"",
+					"$(inherited)",
+				);
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = manueltest;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/quentin/Desktop/CPM message storage/CPMLibrary/build";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = "$(inherited)";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		01B7A6D5715F4095B69D4F65 /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				364361AC3B0E43F899E6258D /* Debug */,
+				08ACD0708CB84F8CA61C0E48 /* Release */,
+				CB74F352D1BD4F8294F95A96 /* MinSizeRel */,
+				3DA6F2A01FA14B1EA9C1209B /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		3DF359D384DE4B6787BA9C1B /* Build configuration list for PBXNativeTarget "manueltest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E6128791BC8E48DCAA461DE3 /* Debug */,
+				1F75CBE1E3844D58ACB980E4 /* Release */,
+				522B7020586E4E5C91F18E0A /* MinSizeRel */,
+				7F070732F6C64CA68EC50022 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		43B4FA589C284267BAB57CDA /* Build configuration list for PBXProject "CPMMessageStorage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D75FF7FCB2F648CC9E51C4F7 /* Debug */,
+				698DBC3DAC82496FA3C1EDE4 /* Release */,
+				8DCF22F529C243638636364B /* MinSizeRel */,
+				13B900D439A04602893987ED /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7B2E9B598ACF4A7996AE3236 /* Build configuration list for PBXNativeTarget "CPMMessageStorage" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0CF234D50607453789F2B815 /* Debug */,
+				36136FBB75694145BCA1E000 /* Release */,
+				63C3A4BE7AF44F6394C84D90 /* MinSizeRel */,
+				673F58FC0D594A898195C3B8 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		7B659F906C2747A785954485 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F51AE23E5074BB3BAAB320A /* Debug */,
+				02D0B194F8F7468498589413 /* Release */,
+				E409AC5527EC436DBC52CFA8 /* MinSizeRel */,
+				0FFDF01C60134BA8A163707E /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		ED98F16EF9E347ECB13C10E9 /* Build configuration list for PBXAggregateTarget "package" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B6B1242C51148C28C75C55B /* Debug */,
+				BF2E2249DAEE4C589FFB508B /* Release */,
+				1C40714162894CBE80712079 /* MinSizeRel */,
+				68374AB7901D471D8596A7A7 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 118E6DC714B64611ADD4402D /* Project object */;
+}

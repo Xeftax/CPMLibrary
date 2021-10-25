@@ -10,21 +10,17 @@
 
 using namespace std;
 
+
 class ConversationHistory : CpmObject {
+
+    void add(CpmObject cpmObject);
+    
+    
     private :
 
         string NAME;
 
         list <CpmObject> cpmObjectList;
-
-    public :
-
-        void add(CpmObject cpmObject){
-            //TYPE& dynamic_cast<TYPE&> (compObject);
-            if (typeid(cpmObject)!=typeid(*this)){
-                cpmObjectList.push_back(cpmObject);
-            } else {/*error*/}
-        }
 };
 
 #endif
