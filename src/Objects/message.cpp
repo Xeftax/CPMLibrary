@@ -1,18 +1,5 @@
 #include "message.h"
 
-header_string& header_string::operator=(string const &str){
-    mHeaderContent=str;
-    mAllContent[mHeaderName] = mHeaderContent;
-    return *this;
-};
-
-string header_string::getValue() {
-	return mHeaderContent;
-}
-
-/*string header_string::assign(string str) {
-    return mHeaderContent;
-}*/
 
 string Message::getName() { return FOLDERNAME;}
 uint32_t Message::getUID() { return UID;}

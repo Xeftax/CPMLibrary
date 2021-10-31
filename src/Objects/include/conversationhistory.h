@@ -13,14 +13,15 @@ using namespace std;
 
 class ConversationHistory : CpmObject {
 
+public :
+    
     void add(CpmObject cpmObject);
     
-    
-    private :
+private :
 
-        string NAME;
+    string NAME;
 
-        list <CpmObject> cpmObjectList;
+    list <CpmObject> cpmObjectList;
 };
 
 #endif

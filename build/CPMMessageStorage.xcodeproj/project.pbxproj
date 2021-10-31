@@ -52,6 +52,7 @@
 		6685487127256FB30025982C /* conversationhistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6685486F27256FB30025982C /* conversationhistory.cpp */; };
 		6685487D27257C120025982C /* filetransferhistory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6685487C27257C120025982C /* filetransferhistory.cpp */; };
 		6685488427257C880025982C /* processmessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6685488327257C880025982C /* processmessage.cpp */; };
+		6685488B2726EA610025982C /* groupstate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6685488A2726EA610025982C /* groupstate.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		6685486F27256FB30025982C /* conversationhistory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = conversationhistory.cpp; sourceTree = "<group>"; };
 		6685487C27257C120025982C /* filetransferhistory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = filetransferhistory.cpp; sourceTree = "<group>"; };
 		6685488327257C880025982C /* processmessage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = processmessage.cpp; sourceTree = "<group>"; };
+		6685488A2726EA610025982C /* groupstate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = groupstate.cpp; sourceTree = "<group>"; };
 		6BF209E904434F5CA0F69905 /* CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; lastKnownFileType = text; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
 		798CEE67006F466490170F5D /* media.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = media.h; path = src/Objects/include/media.h; sourceTree = SOURCE_ROOT; };
 		90B7C53BFA5F4DF7BA396725 /* message.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = message.h; path = src/Objects/include/message.h; sourceTree = SOURCE_ROOT; };
@@ -174,6 +176,7 @@
 				6685486F27256FB30025982C /* conversationhistory.cpp */,
 				6685487C27257C120025982C /* filetransferhistory.cpp */,
 				6685488327257C880025982C /* processmessage.cpp */,
+				6685488A2726EA610025982C /* groupstate.cpp */,
 			);
 			name = "Source Files";
 			sourceTree = "<group>";
@@ -381,6 +384,7 @@
 				6328DDCC91AE4940B4BFDE1C /* message.cpp in Sources */,
 				6685487127256FB30025982C /* conversationhistory.cpp in Sources */,
 				6685487D27257C120025982C /* filetransferhistory.cpp in Sources */,
+				6685488B2726EA610025982C /* groupstate.cpp in Sources */,
 				6685488427257C880025982C /* processmessage.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
