@@ -5,14 +5,14 @@
 
 enum class SessionInfoType {ONE_ONE = 0, AD_HOC = 1, PRE_DEFINED = 2};
 
-class SessionInfo : ProcessMessage {
-    public :     
+class SessionInfo : CpmObject{
+    
+public :
             
-        HeaderContent headerContent {headersContent, false};
+    Headers headers {"multipart/related;boundary=cpm;type=\"Application/X-CPM-Session\""};
 
-        messageMap getHeadersContent(){ return headersContent;}
-
-        XCPMContent xCPMContent;
+    XCPM xCPM;
+    
 };
 
 #endif

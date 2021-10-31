@@ -5,8 +5,10 @@
 using namespace std;
 
 int main(){
+    
+    
     FileTransferHistory fileTransferHistory;
-    fileTransferHistory.headerContent.FROM = "moi";
+    /*fileTransferHistory.headerContent.FROM = "moi";
     fileTransferHistory.headerContent.FROM = "toi";
     fileTransferHistory.headerContent.FROM = "nan je rigole";
     fileTransferHistory.headerContent.DATE = "33";
@@ -18,7 +20,11 @@ int main(){
     fileTransferHistory.headerContent.MESSAGE_BODY = "djschxjbsqhhdiscjhvncjxbsdhzbdsodksqsd\ndsfhdjsihfeiozhfjdsbfhds";
     string test = fileTransferHistory.headerContent.FROM;
     cout << "|" << test << "|\n";
-    for (auto& s : fileTransferHistory.getHeadersContent()){
+    for (auto& s : fileTransferHistory.headerContent.getHeadersMap()){
         cout << s.first << s.second << "\n";
-    } 
+    }
+    cout << "\n";
+    cout << fileTransferHistory.headerContent.getHeadersText();*/
+    
+    return 0;
 }
