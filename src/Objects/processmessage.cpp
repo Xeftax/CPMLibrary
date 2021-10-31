@@ -1,4 +1,5 @@
 #include "processmessage.h"
+#define CPM_MSG_STOR_FROM "From"
 
 string Headers::getCONTENT_TYPE(){
     return CONTENT_TYPE;
@@ -6,7 +7,7 @@ string Headers::getCONTENT_TYPE(){
 
 stringMap Headers::getMap(){
     stringMap content;
-    content["From:"]=FROM;
+    content[CPM_MSG_STOR_FROM]=FROM;
     content["Date:"]=DATE;
     content["Subject:"]=subject;
     content["Conversation-ID:"]=CONVERSATION_ID;
@@ -18,7 +19,7 @@ stringMap Headers::getMap(){
 
 string Headers::getText(){
     string content;
-    content = content + "From:" + FROM;
+    content = content + CPM_MSG_STOR_FROM + FROM;
     content = content + "\n" + "Date:" + DATE;
     content = content + "\n" + "Subject:" + subject;
     content = content + "\n" + "Conversation-ID:" + CONVERSATION_ID;

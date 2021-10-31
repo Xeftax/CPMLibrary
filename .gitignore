@@ -1,5 +1,2 @@
 /.DS_Store
-/manualtest.dSYM
-/test.dSYM
-/manualtest
-/test
+build/
