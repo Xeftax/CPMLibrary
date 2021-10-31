@@ -1,5 +1,0 @@
-/Users/quentin/Desktop/CPM message storage/CPMLibrary/build/CMakeFiles/manueltest.dir
-/Users/quentin/Desktop/CPM message storage/CPMLibrary/build/CMakeFiles/package.dir
-/Users/quentin/Desktop/CPM message storage/CPMLibrary/build/CMakeFiles/CPMMessageStorage.dir
-/Users/quentin/Desktop/CPM message storage/CPMLibrary/build/CMakeFiles/ALL_BUILD.dir
-/Users/quentin/Desktop/CPM message storage/CPMLibrary/build/CMakeFiles/ZERO_CHECK.dir
