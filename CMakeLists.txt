@@ -18,6 +18,13 @@ add_executable (manueltest ${CMAKE_CURRENT_SOURCE_DIR}/tester/manualtest.cpp)
 target_link_libraries(manueltest CPMMessageStorage)
 set_property(TARGET manueltest PROPERTY CXX_STANDARD 17)
 
+find_package(CxxTest)
+if(CXXTEST_FOUND)
+    include_directories(${CXXTEST_INCLUDE_DIR})
+	CXXTEST_ADD_TEST(unittest_cpm_message_storage tester/cpm_message_storage_test.cc
+	${CMAKE_CURRENT_SOURCE_DIR}/tester/cpm_message_storage_test.h)
+    target_link_libraries(unittest_cpm_message_storage CPMMessageStorage) # as needed
+endif()
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)

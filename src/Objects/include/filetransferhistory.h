@@ -5,7 +5,7 @@
 
 enum class FileTransferType {ONE_ONE = 0, AD_HOC = 1, PRE_DEFINED = 2};
 
-class FileTransferHeaders : Headers{
+class FileTransferHeaders : public Headers{
     
 public :
     
@@ -23,8 +23,8 @@ public :
 class FileTransferHistory : CpmObject{
         
 public :
-
-    FileTransferHeaders headers {"multipart/related;boundary=cpm;type=\"Application/X-CPM-File-Transfer\""};
+	FileTransferHistory() : headers("multipart/related;boundary=cpm;type=\"Application/X-CPM-File-Transfer\""){};
+    FileTransferHeaders headers;
 
     XCPM xCPM;
         
