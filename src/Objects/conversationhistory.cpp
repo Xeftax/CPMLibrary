@@ -1,10 +1,19 @@
 #include "conversationhistory.h"
+#include "sessionhistory.h"
+#include "sessioninfo.h"
+#include "message.h"
+#include "filetransferhistory.h"
+#include "media.h"
+#include "groupstate.h"
+#include "cpmmanager.h"
 
-void ConversationHistory::add(CpmObject cpmObject) {
-    if (typeid(cpmObject)!=typeid(*this)){
-        cpmObjectList.push_back(cpmObject);
-    } else {
-        throw std::invalid_argument("you can't put a Conversation History object on a Conversation History object." );
-    }
-    
+ConversationHistory::ConversationHistory(string name) : StorageCpmObject(name) {}
+ConversationHistory::ConversationHistory(ConversationHistory &copy) : StorageCpmObject(copy) {}
+
+const string& ConversationHistory::getObjectType() {
+    return objectType;
+}
+
+const vector<string>& ConversationHistory::getKnownCPMtypeObjects() {
+    return knownCPMtypeObjects;
 }

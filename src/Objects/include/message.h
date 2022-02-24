@@ -1,32 +1,30 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
-#include <string>
-#include <cstdint>
-
 #include "cpmobject.h"
 
-using namespace std;
-
-
-class Message : CpmObject {
+class Message : public CpmObject {
     
-public :
+    public :
+    friend class MyTestSuite;
     
-    string getName();
-    uint32_t getUID();
-    uint32_t getUIDValidity();
+    Message();
+    Message(Message &copy);
     
-private :
+    virtual void write(string path, bool verif = true);
+    virtual void read(string path);
+    MessageHeaders headers;
+    string message_body;
 
-    string FOLDERNAME;
-    uint32_t UID;
-    uint32_t UIDVALIDITY;
-
-    void setName(string foldername);
-    void setUID(uint32_t uid);
-    void setUIDValidity(uint32_t uidvalidity);
-
+    
+    static const string objectType;
+        
+    private :
+    
+    virtual const string& getObjectType();
+    virtual bool isEqual(shared_ptr<CpmObject> cpmObject);
+    virtual bool cpmObjectValidity();
+    
 };
 
 #endif

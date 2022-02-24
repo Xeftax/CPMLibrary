@@ -1,6 +1,5 @@
 #include "groupstate.h"
 
-
 string GroupState::makeXML(){
     string xml = "<groupstate timestamp=\"" + groupStateElement.TIMESTAMP  // ex : ”2012-06-13T16:39:57-05:00”
         + "\" lastfocussessionid=\"" + groupStateElement.LASTFOCUSSESSIONID // ex : ”da9274453@company.com”
@@ -14,6 +13,10 @@ string GroupState::makeXML(){
     xml += "</groupstate>";
 
     return xml;
+}
+
+const string& GroupState::getObjectType() {
+    return objectType;
 }
 
 

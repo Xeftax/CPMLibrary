@@ -1,27 +1,29 @@
 #ifndef CONVERSATIONISTORY_H
 #define CONVERSATIONISTORY_H
 
-
-#include <iostream>
-#include <string>
+#include <map>
 #include <list>
+#include "storagecpmobject.h"
 
-#include "cpmobject.h"
+class CpmManager;
+class SessionHistory;
 
-using namespace std;
-
-
-class ConversationHistory : CpmObject {
-
-public :
+class ConversationHistory : public StorageCpmObject {
     
-    void add(CpmObject cpmObject);
+    public :
+    friend CpmManager;
     
-private :
-
-    string NAME;
-
-    list <CpmObject> cpmObjectList;
+    ConversationHistory(string name);
+    ConversationHistory(ConversationHistory &copy);
+    
+    static const string objectType;
+    
+    private :
+    
+    virtual const string& getObjectType();
+    static const vector<string> knownCPMtypeObjects;
+    virtual const vector<string>& getKnownCPMtypeObjects();
+    
 };
 
 #endif
