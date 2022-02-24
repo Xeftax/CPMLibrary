@@ -1,8 +1,18 @@
 #ifndef MEDIA_H
 #define MEDIA_H
 
-#include "message.h"
+#include "cpmobject.h"
 
-class Media : Message {};
+class Media : public CpmObject {
+    
+    public :
+
+    static const string objectType;
+    
+    private :
+    
+    virtual const string& getObjectType();
+    
+};
 
 #endif

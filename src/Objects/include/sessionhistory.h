@@ -4,13 +4,26 @@
 #include "conversationhistory.h"
 #include "sessioninfo.h"
 
-using namespace std;
-
-class SessionHistory : ConversationHistory {
-
+class SessionHistory : public StorageCpmObject {
+    
+    public :
+    
+    SessionHistory();
+    SessionHistory(SessionHistory &copy);
+    
+    static const string objectType;
+    
+    shared_ptr<SessionInfo> sessionInfo = make_shared<SessionInfo>();
+    void setSessionInfo(SessionInfo &sessionInfo);
+    
     private :
-
-        SessionInfo sessionInfo;  
+    
+    virtual const string& getObjectType();
+    
+    static const vector<string> knownCPMtypeObjects;
+    virtual const vector<string>& getKnownCPMtypeObjects();
+    
+    
 
 };
 

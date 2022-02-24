@@ -2,7 +2,6 @@
 #define GROUPSTATE_H
 
 #include <list>
-#include <string>
 
 #include "cpmobject.h"
 
@@ -50,11 +49,20 @@ private :
 
 };
 
-class GroupState : CpmObject {
+class GroupState : public CpmObject {
+    
+    public :
+    
+    static const string objectType;
         
+    private :
+    
     GroupStateElement groupStateElement;
     Participants participants;
     string makeXML();
+    
+    virtual const string& getObjectType();
+    
 
 };
 
