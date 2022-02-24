@@ -326,7 +326,6 @@ public:
             TS_ASSERT_EQUALS(e.getCode(), codeError::InvalidUID);
             throw e;
         });
-vcxvcvcxv
             
     }
     
