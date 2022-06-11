@@ -2,7 +2,7 @@
 #include <sstream>
 
 Errors::Errors(int codeError, string const& errorCplm) throw() : mCode(codeError), mErrorCplm(errorCplm) {}
-Errors::Errors(Errors const &copy, string const& errorCplm) throw() : mCode(copy.mCode), mErrorCplm(errorCplm) {}
+Errors::Errors(Errors const &copy, string const& errorCplm) throw() : mCode(copy.mCode), mErrorCplm(errorCplm +" -> "+ copy.mErrorCplm) {}
 
 const char* Errors::what() const throw() {
     ostringstream except;
@@ -33,7 +33,7 @@ vector<string> exceptList_Init() {
     string c7 = "IDs Unequality : the two CPM Objects compared do not have the same ID.";
     string c8 = "Content Unequality : the two CPM Objects compared do not have the same Content.";
     string c9 = "Cache Content Unequality : the two CPM Objects compared do not have the same Cache Content.";
-    string c10 = "Invalid UID : a CPM Object with the same UID already exist";
+    string c10 = "Invalid UID : this UID was already assigned";
     
     vector<string> excepts{c0,c1,c2,c3,c4,c5,c6,c7,c8,c9};
     return excepts;

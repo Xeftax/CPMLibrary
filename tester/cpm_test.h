@@ -14,7 +14,7 @@
 class MyTestSuite : public CxxTest::TestSuite
 {
 public:
-    
+
     void testUIDtoHexConvertor(void) {
         
         CpmObject cpmObject;
@@ -73,7 +73,7 @@ public:
             TS_ASSERT_EQUALS(e.getCode(), codeError::WrongPath);
             throw e;
         });
-        TS_ASSERT_THROWS_ANYTHING(try {cpmObject.cpmObjectValidity();
+        TS_ASSERT_THROWS_ANYTHING(try {cpmObject.isComplete();
         } catch(Errors const &e) {
             TS_ASSERT_EQUALS(e.getCode(), codeError::UnlinkedCpmObject);
             throw e;
@@ -89,7 +89,7 @@ public:
         storageCpmObject->UID = nUid;
         TS_ASSERT_EQUALS(cpmObject.getUIDValidity(), nUid);
         TS_ASSERT_EQUALS(cpmObject.getFolderName(), "name");
-        TS_ASSERT_THROWS_NOTHING(cpmObject.cpmObjectValidity());
+        TS_ASSERT_THROWS_NOTHING(cpmObject.isComplete());
         
         /* test write-read */
         CpmObject unlinkedCpmObject;
@@ -303,8 +303,8 @@ public:
         shared_ptr<CpmManager> cpmManager = make_shared<CpmManager>(defaultPath, "manager");
         TS_ASSERT_EQUALS(cpmManager->getPath(), defaultPath);
         TS_ASSERT_EQUALS(cpmManager->getObjectType(), CpmManager::objectType)
-        TS_ASSERT_EQUALS(cpmManager->knownCPMtypeObjects.size(), 1)
-        TS_ASSERT_EQUALS(cpmManager->knownCPMtypeObjects.front(), ConversationHistory::objectType)
+        TS_ASSERT_EQUALS(cpmManager->allowedCpmObjectsType.size(), 1)
+        TS_ASSERT_EQUALS(cpmManager->allowedCpmObjectsType.front(), ConversationHistory::objectType)
         TS_ASSERT_EQUALS(cpmManager->getNextUID(), 101)
         TS_ASSERT_EQUALS(cpmManager->nextUID, cpmManager->getNextUID())
         

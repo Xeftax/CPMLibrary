@@ -8,195 +8,111 @@
 #include "cpmmanager.h"
 #include "errors.h"
 
+//LoggerPtr logger(Logger::getLogger( "main"));
+
+
 StorageCpmObject::StorageCpmObject(string name) : NAME(name) {}
-StorageCpmObject::StorageCpmObject(StorageCpmObject &copy) : CpmObject(copy), NAME(copy.NAME), cpmObjectsList(copy.cpmObjectsList) {}
+StorageCpmObject::StorageCpmObject(StorageCpmObject &copy) : CpmObject(copy), NAME(copy.NAME), storageCpmObjectList(copy.storageCpmObjectList), cpmObjectUIDList(copy.cpmObjectUIDList) {}
 
 string& StorageCpmObject::getName(){
     return NAME;
 }
 
 string StorageCpmObject::getPath(){
-    const string except = "error while getting the Storage Cpm Object path";
-    try {
-        cpmObjectValidity();
-    } catch(Errors const &e) {
-        throw Errors(e, except);
-    }
-    shared_ptr<StorageCpmObject> parent = mParent.lock();
-    return parent->getPath() + parent->NAME + PATH_SEP;
+    return CpmObject::getPath()+"_"+NAME+PATH_SEP;
 }
 
 uint32_t StorageCpmObject::getNextUID(){
-    const string except = "error while giving an UID";
-    try {
-        cpmObjectValidity();
-    } catch(Errors const &e) {
-        throw Errors(e, except);
-    }
-    return mParent.lock()->getNextUID();
+    return mParent.lock()?mParent.lock()->getNextUID():throw Errors(UnlinkedCpmObject, "error while giving an UID");
 }
 
-void StorageCpmObject::append(shared_ptr<CpmObject> cpmObject) {
-    const string except = "error while adding a '"+(cpmObject?cpmObject->getObjectType():"nullptr")+"' type in a '"+getObjectType();
-    try {
-        cpmObjectValidity();
-    } catch (Errors const &e) {
-        throw Errors(e,except);
-    }
-    if (cpmObject == nullptr) throw Errors(-1,except);
+uint32_t StorageCpmObject::append(shared_ptr<CpmObject> cpmObject) {
+    const string except = "error while adding a '"+cpmObject->getObjectType()+"' type in a '"+getObjectType();
     if (cpmObject->mParent.lock()) throw Errors(LinkedCpmObject, except);
-    const vector<string> &knownObjects = getKnownCPMtypeObjects();
-    if (find(knownObjects.begin(), knownObjects.end(), cpmObject->getObjectType()) == knownObjects.end()) {
+    const vector<string> &allowedObjects = getAllowedCpmObjectTypes();
+    if (find(allowedObjects.begin(), allowedObjects.end(), cpmObject->getObjectType()) == allowedObjects.end())
         throw Errors(IncompatibleCpmObject, except);
-    }
+    
     
     try {
         cpmObject->mParent = shared_from_this();
     } catch(exception const &e) {
         throw Errors(-1,except+" : "+e.what()+", Storage CPM Objects must be shared_ptr");
     }
-    if (cpmObject->UID == 0) cpmObject->UID = getNextUID();
-    if (not givenUIDs.insert(cpmObject->UID).second) throw Errors(InvalidUID, except);
-    cpmObjectsList.insert(make_pair(cpmObject->getObjectType(), cpmObject));
-}
-
-template<typename CpmObj>
-MapByType<CpmObj> StorageCpmObject::fetch(){
-    MapByType<CpmObj> mapByType;
+    cpmObject->UID = getNextUID();
+    CpmManager::write(cpmObject);
     
-    pair<ItCpmMap,ItCpmMap> itByType(cpmObjectsList.begin(),cpmObjectsList.end());
-    if (CpmObj::objectType != CpmObject::objectType){itByType = cpmObjectsList.equal_range(CpmObj::objectType);}
-    for(ItCpmMap it = itByType.first;  it != itByType.second;  ++it){
-        uint32_t uid = it->second->getUID();
-        shared_ptr<CpmObject> ptrCpmObject = it->second;
-        mapByType.insert(make_pair(uid, ptrCpmObject));
-    }
-    return mapByType;
+    if (dynamic_pointer_cast<StorageCpmObject>(cpmObject))
+        storageCpmObjectList.insert(make_pair(cpmObject->getUID(), cpmObject));
+    else
+        cpmObjectUIDList.insert(cpmObject->getUID());
+    return cpmObject->UID;
 }
 
-template MapByType<CpmObject> StorageCpmObject::fetch<CpmObject>();
-template MapByType<ConversationHistory> StorageCpmObject::fetch<ConversationHistory>();
-template MapByType<SessionHistory> StorageCpmObject::fetch<SessionHistory>();
-template MapByType<Message> StorageCpmObject::fetch<Message>();
-template MapByType<FileTransferHistory> StorageCpmObject::fetch<FileTransferHistory>();
-template MapByType<Media> StorageCpmObject::fetch<Media>();
-template MapByType<GroupState> StorageCpmObject::fetch<GroupState>();
-
-template<typename CpmObj, typename... Args>
-shared_ptr<CpmObj> StorageCpmObject::createNew(Args... args) {
-    shared_ptr<CpmObj> sharedCpmObject = make_shared<CpmObj>(args...);
-    append(sharedCpmObject);
-    return sharedCpmObject;
-}
-
-template shared_ptr<ConversationHistory> StorageCpmObject::createNew<ConversationHistory>(string);
-template shared_ptr<ConversationHistory> StorageCpmObject::createNew<ConversationHistory>(char const *);
-template shared_ptr<SessionHistory> StorageCpmObject::createNew<SessionHistory>();
-template shared_ptr<Message> StorageCpmObject::createNew<Message>();
-template shared_ptr<FileTransferHistory> StorageCpmObject::createNew<FileTransferHistory>();
-template shared_ptr<Media> StorageCpmObject::createNew<Media>();
-template shared_ptr<GroupState> StorageCpmObject::createNew<GroupState>();
-
-
-void StorageCpmObject::write(string path, bool verif){
-    cpmObjectValidity();
-    path = folderPathCheck(path);
-    string completePath;
-    getUIDValidity()?completePath = path+UIDstoHexString()+"_"+NAME:completePath = path+NAME;
-    filesystem::create_directory(completePath);
-    MapByType<CpmObject> allCpmObjects = fetch();
-    for (auto& pair : allCpmObjects) {
-        pair.second->write(completePath, false);
-    }
-    shared_ptr<CpmObject> compareCpmObject;
-    ///
-    ///
-    if (getObjectType() == SessionHistory::objectType) compareCpmObject = make_shared<SessionHistory>();
-    else if (getObjectType() == ConversationHistory::objectType)
-        compareCpmObject = make_shared<ConversationHistory>(NAME);
-    else if (getObjectType() == CpmManager::objectType) compareCpmObject = make_shared<CpmManager>(path, NAME, UID);
-    else verif = false;
-    ///
-    ///
-    if (verif) writeVerif(compareCpmObject, completePath);
-    
-}
-
-void StorageCpmObject::read(string path){
-    const string except = "error while reading "+path+" : unable to recognize the file type";
-    for (const auto &entry : filesystem::directory_iterator(path)) {
+void StorageCpmObject::scan() {
+    shared_ptr<StorageCpmObject> parent = dynamic_pointer_cast<SessionHistory>(shared_from_this());
+    for (const auto &entry : filesystem::directory_iterator(getPath())) {
         string path = entry.path();
-        string name = path.substr(path.find_last_of("/")+1);
-        string type;
-        
-        shared_ptr<CpmObject> newCpmObject;
-        pair<uint32_t, uint32_t> uids;
+        string name = path.substr(path.rfind(PATH_SEP) +1);
         try {
-            uids = hexStringtoIntUIDs(name);
-        } catch(exception const &e) {
-            throw Errors(IncompatibleCpmObject, except);
-        }
-        
-        string parentName = path.substr(0,path.find_last_of("/"));
-        parentName = parentName.substr(parentName.find_last_of("/")+1);
-        if (name.find("_") != string::npos) {
-            if (parentName.find("_") != string::npos) newCpmObject = make_shared<SessionHistory>();
-            else newCpmObject = make_shared<ConversationHistory>(name.substr(name.find("_")));
-        } else {
-            shared_ptr<CpmObject> cpmObject = make_shared<CpmObject>();
-            try {
-                cpmObject->read(path);
-            } catch(Errors const &e) {
-                if (e.getCode() != IncompatibleCpmObject or typeRead.empty()) throw e;
+            pair<uint32_t,uint32_t> uids = CpmManager::hexStringtoIntUIDs(name);
+            if (storageCpmObjectList.find(uids.second) != storageCpmObjectList.end() or cpmObjectUIDList.find(uids.second) != cpmObjectUIDList.end()) break;
+            if (getUID() != uids.first) throw Errors(InconsistentPath,"parent UID does not match with the file name");
+            size_t _pos = name.find("_");
+            if (_pos != string::npos) {
+                shared_ptr<StorageCpmObject> storageCpmObject = dynamic_pointer_cast<StorageCpmObject>(CpmManager::read(path));
+                storageCpmObject->mParent = shared_from_this();
+                storageCpmObject->hexStringtoIntUIDs(name.substr(0, _pos));
+                storageCpmObjectList.insert(make_pair(storageCpmObject->getUID(), storageCpmObject));
+                storageCpmObject->scan();
+            } else {
+                if (not parent or uids.second != UID+1)
+                    cpmObjectUIDList.insert(uids.second);
             }
-            string type = cpmObject->typeRead;
-            
-            ///
-            ///
-            if (type == Message::objectType) newCpmObject = make_shared<Message>();
-            else if (type == FileTransferHistory::objectType) newCpmObject = make_shared<FileTransferHistory>();
-            else if (type == SessionInfo::objectType) newCpmObject = make_shared<SessionInfo>();
-            else if (type == GroupState::objectType) newCpmObject = make_shared<GroupState>();
-            else if (type == Media::objectType) newCpmObject = make_shared<Media>();
-            else newCpmObject = make_shared<CpmObject>();
-            ///
-            ///
-            
-            newCpmObject->typeRead = cpmObject->typeRead;
-            newCpmObject->headersRead = cpmObject->headersRead;
-            newCpmObject->bodyRead = cpmObject->bodyRead;
+        } catch(exception const &e) {
+            cout << e.what() << endl;
+            //LOG4CXX_ERROR(logger, "unable to treat the file : " << path << " : " << e.what());
         }
-        
-        newCpmObject->UID = uids.second;
-        newCpmObject->read(path);
-        append(newCpmObject);
     }
+}
+
+shared_ptr<CpmObject> StorageCpmObject::fetchByUID(uint32_t uid) {
+    auto it1 = cpmObjectUIDList.find(uid);
+    if (it1 != cpmObjectUIDList.end()) {
+        string fileName = CpmManager::UIDstoHexString(make_pair(getUID(), uid));
+        shared_ptr<CpmObject> cpmObject;
+        cpmObject->UID = uid;
+        cpmObject->mParent = shared_from_this();
+        cpmObject = CpmManager::read(getPath()+fileName);
+        return cpmObject;
+    }
+    auto it2 = storageCpmObjectList.find(uid);
+    if (it2 != storageCpmObjectList.end()) return it2->second;
+
+    throw Errors(InvalidUID,"error in fetching the object with the uid : "+to_string(uid));
+}
+
+shared_ptr<CpmObject> StorageCpmObject::fetch(int increment) {
+    uint32_t uid = *fetchIterator;
+    advance(fetchIterator, increment);
+    return fetchByUID(uid);
 }
 
 const string& StorageCpmObject::getObjectType() {
     return objectType;
 }
 
-const vector<string>& StorageCpmObject::getKnownCPMtypeObjects() {
-    return knownCPMtypeObjects;
+const vector<string>& StorageCpmObject::getAllowedCpmObjectTypes() {
+    return allowedCpmObjectTypes;
 }
 
-bool StorageCpmObject::isEqual(shared_ptr<CpmObject> cpmObject) {
-    CpmObject::isEqual(cpmObject);
-    shared_ptr<StorageCpmObject> storageCpmObject = dynamic_pointer_cast<StorageCpmObject>(cpmObject);
+bool StorageCpmObject::checkWritingIntegrity() {
+    shared_ptr<StorageCpmObject> storageCpmObject = dynamic_pointer_cast<StorageCpmObject>(CpmManager::read(getPath()));
+    if (cpmObjectUIDList != storageCpmObject->cpmObjectUIDList or storageCpmObjectList != storageCpmObject->storageCpmObjectList)
+        throw Errors(ContentUnequality);
     if (NAME != storageCpmObject->NAME)
         throw Errors(IDsUnequality);
-    if (cpmObjectsList.size() != storageCpmObject->cpmObjectsList.size())
-        throw Errors(ContentUnequality);
-    pair<ItCpmMap,ItCpmMap> its(cpmObjectsList.begin(),cpmObjectsList.end());
-    ItCpmMap it2 = storageCpmObject->cpmObjectsList.begin();
-    for(ItCpmMap it1 = its.first;  it1 != its.second;  ++it1){
-        if (it1->first != it2->first or it1->second->getUID() != it2->second->getUID())
-            throw Errors(ContentUnequality);
-        it1->second->isEqual(it1->second);
-        ++it2;
-    }
-    return true;
+    return CpmObject::checkWritingIntegrity();
 }
 
 

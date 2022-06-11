@@ -2,23 +2,34 @@
 #define SESSIONINFO_H
 
 #include "cpmobject.h"
+#include "media.h"
 
-enum class SessionInfoType {ONE_ONE = 0, AD_HOC = 1, PRE_DEFINED = 2};
+class SessionHistory;
 
 class SessionInfo : public CpmObject {
     
     public :
+    friend SessionHistory;
+    
+    SessionInfo();
+    SessionInfo(map<string,string> headers_map, string body);
+    SessionInfo(SessionInfo &copy);
             
     SessionInfoHeaders headers;
-
-    XCPM xCPM;
+    XCPM xcpm{"Application/X-CPM-Session" ,"session-type"};
+    
+    virtual string preview();
     
     static const string objectType;
+    virtual const string& getContentType();
+    
+    virtual bool checkWritingIntegrity();
+    virtual bool isComplete();
     
     private :
-    
+    static string mContentType;
     virtual const string& getObjectType();
-    
+
 };
 
 #endif

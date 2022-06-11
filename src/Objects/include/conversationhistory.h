@@ -21,8 +21,8 @@ class ConversationHistory : public StorageCpmObject {
     private :
     
     virtual const string& getObjectType();
-    static const vector<string> knownCPMtypeObjects;
-    virtual const vector<string>& getKnownCPMtypeObjects();
+    static const vector<string> allowedCpmObjectTypes;
+    virtual const vector<string>& getAllowedCpmObjectTypes();
     
 };
 

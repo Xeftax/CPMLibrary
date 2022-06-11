@@ -28,11 +28,13 @@ const string GroupState::objectType = "GroupState/CPIM";
 
 const string Media::objectType = "Media/CPIM";
 
-const vector<string> StorageCpmObject::knownCPMtypeObjects = {CpmObject::objectType};
+const vector<string> StorageCpmObject::allowedCpmObjectTypes = {CpmObject::objectType};
 
-const vector<string> CpmManager::knownCPMtypeObjects = {ConversationHistory::objectType};
+const vector<string> SessionHistory::allowedCpmObjectTypes = {SessionInfo::objectType, Message::objectType, FileTransferHistory::objectType, GroupState::objectType, Media::objectType};
 
-const vector<string> ConversationHistory::knownCPMtypeObjects = {SessionHistory::objectType, Message::objectType, FileTransferHistory::objectType, Media::objectType};
+const vector<string> ConversationHistory::allowedCpmObjectTypes = {SessionHistory::objectType, Message::objectType, FileTransferHistory::objectType, Media::objectType};
 
-const vector<string> SessionHistory::knownCPMtypeObjects = {SessionInfo::objectType, Message::objectType, FileTransferHistory::objectType, GroupState::objectType, Media::objectType};
+const vector<string> CpmManager::allowedCpmObjectTypes = {ConversationHistory::objectType};
+
+const vector<string> CpmManager::knownCpmObjectTypes = {ConversationHistory::objectType, SessionHistory::objectType, SessionInfo::objectType, Message::objectType, FileTransferHistory::objectType, GroupState::objectType, Media::objectType, CpmObject::objectType, StorageCpmObject::objectType};
 

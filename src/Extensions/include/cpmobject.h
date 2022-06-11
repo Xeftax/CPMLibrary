@@ -9,6 +9,7 @@
 #include <string>
 #include <list>
 #include <map>
+#include <log4cxx/logger.h>
 #include "cpmheaders.h"
 #include "xcpm.h"
 
@@ -16,45 +17,44 @@ using namespace std;
 
 class MyTestSuite;
 class StorageCpmObject;
+class CpmManager;
 
 class CpmObject {
     
     public :
     friend MyTestSuite;
     friend StorageCpmObject;
+    friend CpmManager;
     
     CpmObject();
     CpmObject(CpmObject &copy);
+    virtual ~CpmObject();
         
-    const uint32_t getUID();
-    virtual const string& getFolderName();
+    virtual const uint32_t getUID();
+    virtual const string getFolderName();
     virtual const uint32_t getUIDValidity();
+    virtual string getPath();
     
-    virtual void write(string path, bool verif = true);
-    virtual void read(string path);
+    virtual string preview();
     
     static const string objectType;
+    
+    virtual bool checkWritingIntegrity();
+    virtual bool isComplete();
         
     protected :
 
     uint32_t UID = 0;
     weak_ptr<StorageCpmObject> mParent;
-    
-    string typeRead;
-    headersMap headersRead;
-    string bodyRead;
-    void cleanCache();
+    void setParent(shared_ptr<StorageCpmObject>);
     
     string UIDstoHexString();
-    pair<uint32_t,uint32_t> hexStringtoIntUIDs(string hexuid);
+    void hexStringtoIntUIDs(string hexuid);
     
     const static string mUnknownString;
+    //const static StorageCpmObject nullParent;
     virtual const string& getObjectType();
     string folderPathCheck(string path);
-    virtual bool cpmObjectValidity();
-    virtual bool isEqual(shared_ptr<CpmObject> cpmObject);
-    
-    bool writeVerif(shared_ptr<CpmObject> newCpmObject, string path);
     
 };
 

@@ -14,6 +14,6 @@ const string& ConversationHistory::getObjectType() {
     return objectType;
 }
 
-const vector<string>& ConversationHistory::getKnownCPMtypeObjects() {
-    return knownCPMtypeObjects;
+const vector<string>& ConversationHistory::getAllowedCpmObjectTypes() {
+    return allowedCpmObjectTypes;
 }
