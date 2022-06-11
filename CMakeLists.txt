@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.0.0)
 project(CPMMessageStorage VERSION 0.1.0)
+find_package(log4cxx REQUIRED)
 
 #include(CTest)
 #enable_testing()
@@ -11,6 +12,7 @@ file(GLOB CPP_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/Objects/*.cpp ${CMAKE_CURREN
 add_library(CPMMessageStorage ${CPP_FILES} ${CPP_HEADERS})
 target_include_directories(CPMMessageStorage PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src/Objects/include ${CMAKE_CURRENT_SOURCE_DIR}/src/Extensions/include)
 set_property(TARGET CPMMessageStorage PROPERTY CXX_STANDARD 17)
+target_link_libraries(CPMMessageStorage log4cxx)
 
 #file(GLOB CPP_HEADERS ${CMAKE_CURRENT_SOURCE_DIR}/src/Extensions/include/*.h)
 #file(GLOB CPP_FILES ${CMAKE_CURRENT_SOURCE_DIR}/src/Extensions/*.cpp)

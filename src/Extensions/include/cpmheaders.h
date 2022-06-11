@@ -7,98 +7,144 @@
 #include <vector>
 #include <list>
 #include <map>
+#include <set>
+#include <log4cxx/logger.h>
 
 #define HEADER_CONTENT_TYPE "Content-Type"
-#define HEADER_FROM "From"
-#define HEADER_TO "To"
-#define HEADER_DATE "Date"
-#define HEADER_SUBJECT "Subject"
-#define HEADER_CONVERSATION_ID "Conversation-ID"
-#define HEADER_CONTRIBUTION_ID "Contribution-ID"
-#define HEADER_IN_REPLY_TO_CONTRIBUTION_ID "InReplyTo-Contribution-ID"
 #define HEADER_SEP ": "
+#define HEADER_XCPM_PARTICIPANT_SEP ";"
 
 using namespace std;
 
-struct headersMapComparator {
-    static vector<string> headersOrder;
-    bool operator()(const std::string& a, const std::string& b) const {
-        auto itb = find(headersOrder.begin(), headersOrder.end(), b);
-        if (itb == headersOrder.cend()) {
-            cout << "warning : '" << b << "' is an unknown header." << endl;
-            headersOrder.push_back(b);
-            itb = find(headersOrder.begin(), headersOrder.end(), b);
-        }
-        auto ita = find(headersOrder.begin(), headersOrder.end(), a);
-        if (ita == headersOrder.cend()) {
-            cout << "warning : '" << a << "' is an unknown header." << endl;
-            headersOrder.push_back(a);
-            ita = find(headersOrder.begin(), headersOrder.end(), a);
-        }
-        return ita < itb;
-    }
+
+class header {
+    
+    public :
+    
+    header(string title, string &value, int strenght, bool is_mandatory);
+    header(string title, list<string> &values, string values_sep, int strenght, bool is_mandatory);
+    header(string title, int &value, list<string> &defined_values, int strenght, bool is_mandatory);
+    
+    string getTitle() const;
+    virtual string getValue() const;
+    virtual void setValue(string value) const;
+    int getStrenght() const;
+    bool isMandatory() const;
+    
+    private :
+    int mHeaderType;
+    
+    string mTitle;
+    string &mValue;
+    int mStrenght;
+    bool mMandatory;
+    
+    list<string> &mValues;
+    string mValuesSep;
+    
+    int &mIndexValue;
+    
+    string null_string;
+    list<string> null_list;
+    int null_int = -1;
+
 };
 
-typedef map<string,string,headersMapComparator> headersMap;
+
+struct headersComparator {
+    bool operator()(const header &a, const header &b) const;
+    //static log4cxx::Logger logger;
+};
 
 class Headers {
         
     public :
     
-    Headers();
-    Headers(Headers &copy);
+    virtual void setHeaders(map<string,string> content);
+    virtual map<string,string> getMap() const;
+    virtual string format();
+    
+    void add(string h_title, string h_value);
+    void clear(string h_title);
+    
+    virtual bool isComplete();
+    static string headersCompletionExcept;
+    
+    protected :
+    
+    set<header,headersComparator> headersList;
+    list<string> additionalHeadersValues;
+    
+    static bool stringEquality(string h_title1, string h_title2);
         
+};
+
+struct ConversationHeaders : public Headers {
+    
+    ConversationHeaders();
+    
     string FROM;
     string DATE;
-    string subject = "";
+    string subject;
     string CONTENT_TYPE;
-    
-    virtual void setHeaders(headersMap content);
-    virtual headersMap getMap();
-    virtual string toText();
-        
-    protected:
-    
-    virtual bool headersCompletion();
-    static string headersCompletionExcept;
-        
 };
 
-class MessageHeaders : public Headers {
-    
-    public :
-    friend class Message;
+struct MessageHeaders : public ConversationHeaders {
         
     MessageHeaders();
-    MessageHeaders(MessageHeaders &copy);
             
     string TO;
-    
-    virtual void setHeaders(headersMap content);
-    virtual headersMap getMap();
-    
-    protected:
-    virtual bool headersCompletion();
-    
 };
 
-class SessionInfoHeaders : public Headers{
+struct SessionInfoHeaders : public ConversationHeaders {
         
-    public :
-    
     SessionInfoHeaders();
-    SessionInfoHeaders(SessionInfoHeaders &copy);
         
     string CONVERSATION_ID;
     string CONTRIBUTION_ID;
-    string in_reply_to_contribution_id = "";
+    string in_reply_to_contribution_id;
+};
+
+struct XcpmHeaders : public Headers {
     
-    virtual void setHeaders(headersMap content);
-    virtual headersMap getMap();
+    XcpmHeaders(string titleTypeHeader);
     
-    protected:
-    virtual bool headersCompletion();
-        
+    int TYPE = -1;
+    list<string> INVITED_PARTICIPANTS;
+    
+    virtual string format();
+    
+    private:
+    static list<string> xcpmTypes;
+};
+
+struct MediaHeaders : public Headers{
+    
+    MediaHeaders();
+    
+    string TYPE;
+    string TRANSFER_ENCODING;
+    string ID;
+    string description;
+    string disposition;
+};
+
+struct GroupeStateHeaders : public Headers{
+    
+    GroupeStateHeaders();
+    
+    string TIMESTAMP;
+    string LASTFOCUSSESSIONID;
+    string GROUP_TYPE;
+    
+    virtual string format();
+};
+
+struct GroupeStateParticipants : public Headers{
+    
+    GroupeStateParticipants();
+    
+    virtual string format();
 };
 
 #endif

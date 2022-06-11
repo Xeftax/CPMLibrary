@@ -7,7 +7,8 @@
 #include <map>
 #include <mutex>
 #include "storagecpmobject.h"
-
+#include <log4cxx/logger.h>
+using namespace log4cxx;
 using namespace std;
 
 class ConversationHistory;
@@ -33,17 +34,21 @@ class CpmManager : public StorageCpmObject {
     public :
     friend class MyTestSuite;
     
-    CpmManager(string path, string name, uint32_t firstUID = 100);
-    CpmManager(CpmManager &copy, uint32_t firstUID = 100);
+    CpmManager(string path, string name);
+    CpmManager(CpmManager &copy);
+    ~CpmManager();
     
     virtual string getPath();
     uint32_t getNextUID();
     
-    void removeConversationHistory(uint32_t uid);
-    void removeConversationHistory(string name);
+    static string UIDstoHexString(pair<uint32_t,uint32_t> uids);
+    static pair<uint32_t,uint32_t> hexStringtoIntUIDs(string hexuid);
     
-    void read();
-    void write();
+    virtual void scan();
+    virtual uint32_t append(shared_ptr<CpmObject> cpmObject);
+    
+    static shared_ptr<CpmObject> read(string path);
+    static string write(shared_ptr<CpmObject> cpmObject);
     
     static const string objectType;
     
@@ -56,10 +61,13 @@ class CpmManager : public StorageCpmObject {
     
     virtual const string& getObjectType();
     
-    static const vector<string> knownCPMtypeObjects;
-    virtual const vector<string>& getKnownCPMtypeObjects();
+    static const vector<string> knownCpmObjectTypes;
+    static const vector<string> allowedCpmObjectTypes;
+    virtual const vector<string>& getAllowedCpmObjectTypes();
     
-    static const shared_ptr<StorageCpmObject> cpmSeed;
+    //static const shared_ptr<StorageCpmObject> cpmSeed;
+    
+    static Logger logger;
 };
 
 #endif

@@ -3,22 +3,18 @@
 
 #include "sessioninfo.h"
 
-enum class FileTransferType {ONE_ONE = 0, AD_HOC = 1, PRE_DEFINED = 2};
-
-class FileTransferHistory : public CpmObject {
+class FileTransferHistory : public SessionInfo {
     
     public :
-    
-    SessionInfoHeaders headers;
-    
-    string MESSAGE_BODY;
-    
-    XCPM xCPM;
+    FileTransferHistory();
+    FileTransferHistory(map<string,string> headers_map, string body);
+    FileTransferHistory(FileTransferHistory &copy);
     
     static const string objectType;
+    virtual const string& getContentType();
     
     private :
-    
+    static string mContentType;
     virtual const string& getObjectType();
         
 };

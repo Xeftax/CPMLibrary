@@ -1,48 +1,36 @@
 #include "message.h"
 #include "errors.h"
+#include "cpmmanager.h"
 
 Message::Message() {}
-Message::Message(Message &copy) : CpmObject(copy) ,headers(copy.headers), message_body(copy.message_body) {}
+Message::Message(map<string,string> headers_map, string body) : message_body(body) {
+    headers.setHeaders(headers_map);}
+Message::Message(Message &copy) : CpmObject(copy), message_body(copy.message_body) {
+    headers.setHeaders(copy.headers.getMap());
+}
 
 const string& Message::getObjectType() {
     return objectType;
 }
 
-void Message::write(string path, bool verif) {
-    CpmObject::write(path, verif);
-    path = path + UIDstoHexString();
-    ofstream newFile(path);
-    newFile << HEADER_CONTENT_TYPE << HEADER_SEP << getObjectType() << endl;
-    newFile << endl << headers.toText();
-    newFile << endl << message_body;
-    newFile.close();
-    
-    shared_ptr<CpmObject> compareCpmObject = make_shared<Message>();
-    if (verif) writeVerif(compareCpmObject, path);
+string Message::preview() {
+    ostringstream content;
+    content << CpmObject::preview() << endl;
+    content << headers.format() << endl;
+    content << message_body;
+    return content.str();
 }
 
-void Message::read(string path) {
-    if (headersRead.empty() or bodyRead.empty() or typeRead.empty()) {
-        folderPathCheck(path);
-        CpmObject::read(path);
-    }
-    headers.setHeaders(headersRead);
-    message_body=bodyRead;
-    cleanCache();
-}
-
-bool Message::isEqual(shared_ptr<CpmObject> cpmObject) {
-    CpmObject::isEqual(cpmObject);
-    shared_ptr<Message> message = dynamic_pointer_cast<Message>(cpmObject);
-    if (headers.getMap() != message->headers.getMap() or message_body != message->message_body)
+bool Message::checkWritingIntegrity() {
+    shared_ptr<Message> message = dynamic_pointer_cast<Message>(CpmManager::read(getPath()));
+    if (preview() != message->preview())
         throw Errors(ContentUnequality);
-    return true;
+    return CpmObject::checkWritingIntegrity();
 }
 
 
-bool Message::cpmObjectValidity(){
-    if (not headers.headersCompletion()) throw Errors(IncompleteCpmObject, headers.headersCompletionExcept);
-    CpmObject::cpmObjectValidity();
+bool Message::isComplete(){
+    if (not headers.isComplete()) throw Errors(IncompleteCpmObject, headers.headersCompletionExcept);
     return true;
 }
 

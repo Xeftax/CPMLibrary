@@ -7,8 +7,6 @@
 
 #define PATH_SEP "/"
 
-typedef multimap<string, shared_ptr<CpmObject>>::iterator ItCpmMap;
-
 template<typename CpmObj> class MapByType;
 
 class StorageCpmObject : public CpmObject, public enable_shared_from_this<StorageCpmObject> {
@@ -22,34 +20,33 @@ class StorageCpmObject : public CpmObject, public enable_shared_from_this<Storag
     virtual string getPath();
     virtual uint32_t getNextUID();
     
-    virtual void append(shared_ptr<CpmObject> cpmObject);
+    virtual void scan();
+    virtual uint32_t append(shared_ptr<CpmObject> cpmObject);
+    virtual shared_ptr<CpmObject> fetchByUID(uint32_t uid);
+    virtual shared_ptr<CpmObject> fetch(int increment = 1);
     
     template<typename CpmObj, typename... Args>
     shared_ptr<CpmObj> createNew(Args... args);
     
-    template<typename CpmObj = CpmObject>
-    MapByType<CpmObj> fetch();
-    
-    virtual void write(string path, bool verif = true);
-    
-    virtual void read(string path);
-    
     static const string objectType;
+    
+    virtual bool checkWritingIntegrity();
     
     protected :
 
     string NAME;
-    
-    multimap<string, shared_ptr<CpmObject>> cpmObjectsList;
-    set<uint32_t> givenUIDs;
+    map<uint32_t,shared_ptr<CpmObject>> storageCpmObjectList;
+    set<uint32_t, greater<uint32_t>> cpmObjectUIDList;
+    set<uint32_t, greater<uint32_t>>::iterator fetchIterator;
     
     virtual const string& getObjectType();
     
-    static const vector<string> knownCPMtypeObjects;
-    virtual const vector<string>& getKnownCPMtypeObjects();
+    static const vector<string> allowedCpmObjectTypes;
+    virtual const vector<string>& getAllowedCpmObjectTypes();
     
-    virtual bool isEqual(shared_ptr<CpmObject> cpmObject);
 
+
+    //static Logger logger;
 };
 
 

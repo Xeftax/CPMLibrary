@@ -9,21 +9,22 @@ class Message : public CpmObject {
     friend class MyTestSuite;
     
     Message();
+    Message(map<string,string> headers, string body);
     Message(Message &copy);
     
-    virtual void write(string path, bool verif = true);
-    virtual void read(string path);
     MessageHeaders headers;
     string message_body;
 
+    virtual string preview();
     
     static const string objectType;
+    
+    virtual bool checkWritingIntegrity();
+    virtual bool isComplete();
         
     private :
     
     virtual const string& getObjectType();
-    virtual bool isEqual(shared_ptr<CpmObject> cpmObject);
-    virtual bool cpmObjectValidity();
     
 };
 
