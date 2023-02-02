@@ -62,10 +62,11 @@ class Headers {
     
     virtual void setHeaders(map<string,string> content);
     virtual map<string,string> getMap() const;
-    virtual string format();
+    virtual string format() const;
     
-    void add(string h_title, string h_value);
-    void clear(string h_title);
+    virtual void add(string h_title, string h_value);
+    virtual void clear(string h_title);
+    virtual void clear();
     
     virtual bool isComplete();
     static string headersCompletionExcept;
@@ -75,7 +76,7 @@ class Headers {
     set<header,headersComparator> headersList;
     list<string> additionalHeadersValues;
     
-    static bool stringEquality(string h_title1, string h_title2);
+    static bool titleCompare(const header h, const string title);
         
 };
 
@@ -112,7 +113,7 @@ struct XcpmHeaders : public Headers {
     int TYPE = -1;
     list<string> INVITED_PARTICIPANTS;
     
-    virtual string format();
+    virtual string format() const;
     
     private:
     static list<string> xcpmTypes;
@@ -129,22 +130,27 @@ struct MediaHeaders : public Headers{
     string disposition;
 };
 
-struct GroupeStateHeaders : public Headers{
+struct GroupStateHeaders : public Headers{
     
-    GroupeStateHeaders();
+    GroupStateHeaders();
+    GroupStateHeaders(const GroupStateHeaders &copy);
     
     string TIMESTAMP;
     string LASTFOCUSSESSIONID;
     string GROUP_TYPE;
     
-    virtual string format();
+    virtual string format() const;
 };
 
 struct GroupeStateParticipants : public Headers{
     
     GroupeStateParticipants();
+    GroupeStateParticipants(const GroupeStateParticipants &copy);
     
-    virtual string format();
+    virtual void add(string name, string comm_addr);
+    virtual void clear(string comm_addr);
+    
+    virtual string format() const;
 };
 
 #endif

@@ -72,6 +72,8 @@ void StorageCpmObject::scan() {
         } catch(exception const &e) {
             cout << e.what() << endl;
             //LOG4CXX_ERROR(logger, "unable to treat the file : " << path << " : " << e.what());
+        } catch(string const &str) {
+            cout << str << endl;
         }
     }
 }

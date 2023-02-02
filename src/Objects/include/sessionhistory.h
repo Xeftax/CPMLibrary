@@ -17,7 +17,8 @@ class SessionHistory : public StorageCpmObject {
     shared_ptr<SessionInfo> sessionInfo = make_shared<SessionInfo>();
     void setSessionInfo(SessionInfo &sessionInfo);
     
-    shared_ptr<GroupState> groupeState = make_shared<GroupState>();
+    shared_ptr<GroupState> groupState = make_shared<GroupState>();
+    void setGroupState(GroupState &groupState);
     
     virtual bool checkWritingIntegrity();
     virtual bool isComplete();

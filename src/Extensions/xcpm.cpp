@@ -111,13 +111,13 @@ map<string,string> XCPM::parsReader(string content) {
         if (t_begin -1 == string::npos) break;
         size_t t_end = content.find(">");
         string hTitle = content.substr(t_begin,t_end-t_begin);
-        string closer = "</"+hTitle.substr(0, hTitle.find(" "))+">";
+        string closer = "</"+hTitle.substr(0, hTitle.find_first_of("\n\t "))+">";
         size_t v_begin = t_end +1;
         size_t v_end = content.find(closer);
         string hValue = content.substr(v_begin,v_end-v_begin);
         content.erase(0,v_end+closer.size());
         
-        if (hTitle == "media-object") hTitle += headers.size();
+        if (headers.find(hTitle) != headers.end()) hTitle += headers.size();
         headers.insert(make_pair(hTitle,hValue));
     }
     

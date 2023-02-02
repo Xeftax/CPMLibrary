@@ -58,11 +58,11 @@ void header::setValue(string value) const{
             int index = 0;
             for (string &val : mValues) {
                 if (val == value) {
-                    mIndexValue = index;
                     break;
                 }
                 index++;
             }
+            mIndexValue = index;
             break;
         }
     }
@@ -104,14 +104,24 @@ MediaHeaders::MediaHeaders() {
     headersList.insert(header("Content-Description", description, 14, false));
     headersList.insert(header("Content-Disposition", disposition, 15, false));
 }
-GroupeStateHeaders::GroupeStateHeaders() {
+GroupStateHeaders::GroupStateHeaders() {
     headersList.insert(header("timestamp", TIMESTAMP, 16, true));
     headersList.insert(header("lastfocussessionid", LASTFOCUSSESSIONID, 17, true));
     headersList.insert(header("group-type", GROUP_TYPE, 18, true));
 };
 
-bool isEqual(string h_title1, string h_title2) {
-  return h_title1 == h_title2;
+GroupStateHeaders::GroupStateHeaders(const GroupStateHeaders &copy) : GroupStateHeaders::GroupStateHeaders() {
+    setHeaders(copy.getMap());
+}
+
+GroupeStateParticipants::GroupeStateParticipants() {}
+
+GroupeStateParticipants::GroupeStateParticipants(const GroupeStateParticipants &copy) {
+    setHeaders(copy.getMap());
+}
+
+bool Headers::titleCompare(const header h, const string title) {
+  return h.getValue() == title;
 }
 
 void Headers::add(string h_title, string h_value) {
@@ -120,11 +130,17 @@ void Headers::add(string h_title, string h_value) {
 }
 
 void Headers::clear(string h_title) {
-    auto header = find_if(headersList.begin(), headersList.end(), bind(stringEquality, h_title, placeholders::_1));
+    auto header = find_if(headersList.begin(), headersList.end(), bind(titleCompare, placeholders::_1, h_title));
     header->setValue("");
+}
+void Headers::clear() {
+    for (const header &h : headersList) {
+        h.setValue("");
+    }
 }
 
 void Headers::setHeaders(map<string,string> content){
+    clear();
     for (const header &h : headersList) {
         auto it = content.find(h.getTitle());
         if (it != content.end()) {
@@ -133,7 +149,7 @@ void Headers::setHeaders(map<string,string> content){
         }
     }
     for (const pair<string,string> &h : content) {
-        add(h.first, h.second);
+        Headers::add(h.first, h.second);
     }
 }
 
@@ -145,7 +161,7 @@ map<string,string> Headers::getMap() const{
     return content;
 }
 
-string Headers::format(){
+string Headers::format() const{
     ostringstream textContent;
     for (auto &h : headersList){
         if (not h.getValue().empty())
@@ -163,7 +179,7 @@ bool Headers::isComplete(){
 
 list<string> XcpmHeaders::xcpmTypes = {"1-1", "Ad-Hoc", "Pre-Defined"};
 
-string XcpmHeaders::format() {
+string XcpmHeaders::format() const {
     ostringstream textContent;
     for (auto &h : headersList){
         if (not h.getValue().empty()) {
@@ -175,23 +191,31 @@ string XcpmHeaders::format() {
     return textContent.str();
 }
 
-string GroupeStateHeaders::format() {
+string GroupStateHeaders::format() const {
     ostringstream textContent;
     for (auto &h : headersList){
         if (not h.getValue().empty()) {
             textContent << endl << "\t" <<h.getTitle();
-            textContent << "=\"" << h.getValue() << "\"";
+            textContent << "=”" << h.getValue() << "”";
         }
     }
     return textContent.str();
 }
 
-string GroupeStateParticipants::format() {
+void GroupeStateParticipants::add(string name, string comm_addr) {
+    Headers::add(comm_addr, name);
+}
+
+void GroupeStateParticipants::clear(string comm_addr) {
+    Headers::clear(comm_addr);
+}
+
+string GroupeStateParticipants::format() const {
     ostringstream textContent;
     for (auto &h : headersList){
         if (not h.getValue().empty()) {
-            textContent << "\t<participant name=\"" << h.getValue();
-            textContent << "\" comm-addr=\"" << h.getTitle() << "\"/>" << endl;
+            textContent << "\t<participant name=”" << h.getValue();
+            textContent << "” comm-addr=”" << h.getTitle() << "”/>" << endl;
         }
     }
     return textContent.str();

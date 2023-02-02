@@ -44,6 +44,9 @@ string CpmManager::UIDstoHexString(pair<uint32_t,uint32_t> uids){
 }
 
 pair<uint32_t,uint32_t> CpmManager::hexStringtoIntUIDs(string hexuid){
+    size_t argValidity = hexuid.substr(0,16).find_first_not_of("0123456789abcdef");
+    if (argValidity != string::npos)
+        throw "unable to convert "+hexuid+" into an unsigned long UIDs";
     string uidValStr = hexuid.substr(0,8);
     string uidStr = hexuid.substr(8,16);
     uint32_t uidValidity = stoul(uidValStr, 0, 16);
@@ -71,9 +74,11 @@ string CpmManager::write(shared_ptr<CpmObject> cpmObject){
     string path = cpmObject->getPath();
     if (dynamic_pointer_cast<StorageCpmObject>(cpmObject)) {
         filesystem::create_directory(path);
-        shared_ptr<SessionHistory> ifSessionHistory = dynamic_pointer_cast<SessionHistory>(cpmObject);
-        if (ifSessionHistory)
-            write(ifSessionHistory->sessionInfo);
+        shared_ptr<SessionHistory> sessionHistory = dynamic_pointer_cast<SessionHistory>(cpmObject);
+        if (sessionHistory) {
+            write(sessionHistory->sessionInfo);
+            write(sessionHistory->groupState);
+        }
     } else {
         ofstream newFile(path);
         newFile << cpmObject->preview();
@@ -95,22 +100,24 @@ shared_ptr<CpmObject> CpmManager::read(string path){
     if (path.substr(path.length() -1) == PATH_SEP) path.pop_back();
     string name = path.substr(path.find_last_of(PATH_SEP) +1);
     if (name.find("_") != string::npos) {
+        pair<uint32_t, uint32_t> uids = hexStringtoIntUIDs(name);
+        ++uids.second;
+        string nextUIDtoString = UIDstoHexString(uids);
         try {
-            pair<uint32_t, uint32_t> uids = hexStringtoIntUIDs(name.substr(0, name.find("_")));
-            uids.second = uids.second++;
-            string childName = UIDstoHexString(uids);
-            shared_ptr<SessionInfo> cpmObject = dynamic_pointer_cast<SessionInfo>(read(path + PATH_SEP + childName));
-            if (cpmObject) {
+            shared_ptr<CpmObject> firstChild = read(path + PATH_SEP + nextUIDtoString);
+            if (firstChild->getObjectType() == SessionInfo::objectType) {
                 shared_ptr<SessionHistory> sessionHistory = make_shared<SessionHistory>();
-                sessionHistory->sessionInfo = cpmObject;
+                sessionHistory->sessionInfo = dynamic_pointer_cast<SessionInfo>(firstChild);
+                ++uids.second;
+                nextUIDtoString = UIDstoHexString(uids);
+                sessionHistory->groupState = dynamic_pointer_cast<GroupState>(read(path + PATH_SEP + nextUIDtoString));
                 return sessionHistory;
-            }
+            } else return make_shared<ConversationHistory>(name.substr(name.find("_") +1));
         } catch(Errors const &e) {
             if (e.getCode() != WrongPath) throw e;
             return make_shared<ConversationHistory>(name.substr(name.find("_") +1));
         }
     }
-    
     
     
     //for data object
@@ -137,6 +144,7 @@ shared_ptr<CpmObject> CpmManager::read(string path){
                         throw Errors(IncompatibleCpmObject, except+" : 1st line is wrong (bad syntax)");
                     }
                     type = lineContent.substr(firstHeaderSize);
+                    if (type == GroupState::objectType)  fileSection = 2;
                     break;
                 }
                     
@@ -171,12 +179,13 @@ shared_ptr<CpmObject> CpmManager::read(string path){
     if (type == Message::objectType) return make_shared<Message>(headers, body.str());
     if (type == FileTransferHistory::objectType) return make_shared<FileTransferHistory>(headers, body.str());
     if (type == SessionInfo::objectType) return make_shared<SessionInfo>(headers, body.str());
-    if (type == GroupState::objectType) return make_shared<GroupState>(headers, body.str());
+    if (type == GroupState::objectType) return make_shared<GroupState>(body.str());
 
 
     return shared_ptr<CpmObject>();
         
 }
+
 
 const string& CpmManager::getObjectType() {
     return objectType;
