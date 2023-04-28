@@ -133,14 +133,14 @@ void Headers::clear(string h_title) {
     auto header = find_if(headersList.begin(), headersList.end(), bind(titleCompare, placeholders::_1, h_title));
     header->setValue("");
 }
-void Headers::clear() {
+void Headers::reset() {
     for (const header &h : headersList) {
         h.setValue("");
     }
 }
 
 void Headers::setHeaders(map<string,string> content){
-    clear();
+    reset();
     for (const header &h : headersList) {
         auto it = content.find(h.getTitle());
         if (it != content.end()) {
@@ -164,7 +164,7 @@ map<string,string> Headers::getMap() const{
 string Headers::format() const{
     ostringstream textContent;
     for (auto &h : headersList){
-        if (not h.getValue().empty())
+        if (h.isMandatory() or not h.getValue().empty())
             textContent << h.getTitle() << HEADER_SEP << h.getValue() << endl;
     }
     return textContent.str();

@@ -66,7 +66,7 @@ class Headers {
     
     virtual void add(string h_title, string h_value);
     virtual void clear(string h_title);
-    virtual void clear();
+    virtual void reset();
     
     virtual bool isComplete();
     static string headersCompletionExcept;

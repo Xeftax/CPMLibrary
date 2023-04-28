@@ -1,3 +1,4 @@
+#include <type_traits>
 #include "storagecpmobject.h"
 #include "sessionhistory.h"
 #include "sessioninfo.h"
@@ -11,7 +12,13 @@
 //LoggerPtr logger(Logger::getLogger( "main"));
 
 
-StorageCpmObject::StorageCpmObject(string name) : NAME(name) {}
+StorageCpmObject::StorageCpmObject(string name) : NAME(name) {
+    const string allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890()_- ";
+    for (const char& c : name) {
+        if (allowedChars.find(c) == string::npos)
+            throw Errors(NameError,"storage cpm object name can only contains this characters : \""+allowedChars+"\" (found: \""+name+"\")");
+    }
+}
 StorageCpmObject::StorageCpmObject(StorageCpmObject &copy) : CpmObject(copy), NAME(copy.NAME), storageCpmObjectList(copy.storageCpmObjectList), cpmObjectUIDList(copy.cpmObjectUIDList) {}
 
 string& StorageCpmObject::getName(){
@@ -19,7 +26,7 @@ string& StorageCpmObject::getName(){
 }
 
 string StorageCpmObject::getPath(){
-    return CpmObject::getPath()+"_"+NAME+PATH_SEP;
+    return CpmObject::getPath()+"_"+NAME;
 }
 
 uint32_t StorageCpmObject::getNextUID(){
@@ -53,11 +60,11 @@ void StorageCpmObject::scan() {
     shared_ptr<StorageCpmObject> parent = dynamic_pointer_cast<SessionHistory>(shared_from_this());
     for (const auto &entry : filesystem::directory_iterator(getPath())) {
         string path = entry.path();
-        string name = path.substr(path.rfind(PATH_SEP) +1);
+        string name = path.substr(path.rfind(PATH_SEP) +1,16);
         try {
             pair<uint32_t,uint32_t> uids = CpmManager::hexStringtoIntUIDs(name);
-            if (storageCpmObjectList.find(uids.second) != storageCpmObjectList.end() or cpmObjectUIDList.find(uids.second) != cpmObjectUIDList.end()) break;
-            if (getUID() != uids.first) throw Errors(InconsistentPath,"parent UID does not match with the file name");
+            if (storageCpmObjectList.find(uids.second) != storageCpmObjectList.end() or cpmObjectUIDList.find(uids.second) != cpmObjectUIDList.end()) continue;
+            if (getUID() != uids.first) throw Errors(UIDValidityError,"inconsistency detected with the uid and the parent directory of the Cpm Object at "+path);
             size_t _pos = name.find("_");
             if (_pos != string::npos) {
                 shared_ptr<StorageCpmObject> storageCpmObject = dynamic_pointer_cast<StorageCpmObject>(CpmManager::read(path));

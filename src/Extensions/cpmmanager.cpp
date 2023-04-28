@@ -14,27 +14,37 @@
 mutex CpmManager::mMutex;
 
 CpmManager::CpmManager(string path, string name) : StorageCpmObject(name), defaultPath(folderPathCheck(path)) {
-    //LOG4CXX_INFO (logger, "CpmManager [" << name << "] created.");
-    nextUID = UID +1;
+    string cpmPath = getPath();
+    if (not filesystem::exists(cpmPath) or not filesystem::is_directory(cpmPath)) {
+        filesystem::create_directory(cpmPath); 
+        ofstream file(".nextUID", ios::binary);
+        uint32_t nextUID = 1;
+        file.write(reinterpret_cast<const char*>(&nextUID), sizeof(nextUID));
+        file.close();
+    }
 }
 
-CpmManager::CpmManager(CpmManager &copy) : StorageCpmObject(copy), defaultPath(copy.defaultPath) {
-    //LOG4CXX_INFO(logger, "CpmManager [" << copy.NAME << "] copied.");
-    nextUID = UID +1;
-}
+CpmManager::CpmManager(CpmManager &copy) : StorageCpmObject(copy), defaultPath(copy.defaultPath) {}
 
-CpmManager::~CpmManager() {
-    ofstream newFile(getPath()+UIDstoHexString(make_pair(getUID(), nextUID)));
-    newFile.close();
-}
+const uint32_t CpmManager::getUID() { return 0; }
+const string CpmManager::getFolderName() { throw Errors(IncompatibleCpmObject,"the CPM Manager is at the head of the CPM Message Storage system, it has no parent so the \'getFolderName()\' can't be called (if you want the CPM Manager name, call the \'getName()\' function)"); }
+const uint32_t CpmManager::getUIDValidity() { throw Errors(IncompatibleCpmObject,"the CPM Manager is at the head of the CPM Message Storage system, it has no parent so the \'getUIDValidity()\' can't be called (if you want the CPM Manager UID, call the \'getUID()\' function)"); }
 
 string CpmManager::getPath(){
-    return defaultPath+NAME+PATH_SEP;
+    return defaultPath+PATH_SEP+NAME;
 }
 
 uint32_t CpmManager::getNextUID(){
     lock_guard<mutex> guard(mMutex);
-    return nextUID++;
+
+    fstream file(".nextUID", std::ios::in | std::ios::out | std::ios::binary);
+    if (!file) { throw Errors(WrongPath,"Error opening file for reading and writing.");}
+    uint32_t uid;
+    file.read(reinterpret_cast<char*>(&uid), sizeof(uid));
+    file.seekp(0);
+    uint32_t nextUID = uid +1;
+    file.write(reinterpret_cast<char*>(&nextUID), sizeof(nextUID));
+    return uid;
 }
 
 string CpmManager::UIDstoHexString(pair<uint32_t,uint32_t> uids){
@@ -45,8 +55,8 @@ string CpmManager::UIDstoHexString(pair<uint32_t,uint32_t> uids){
 
 pair<uint32_t,uint32_t> CpmManager::hexStringtoIntUIDs(string hexuid){
     size_t argValidity = hexuid.substr(0,16).find_first_not_of("0123456789abcdef");
-    if (argValidity != string::npos)
-        throw "unable to convert "+hexuid+" into an unsigned long UIDs";
+    if (argValidity != string::npos or hexuid.length() != 16)
+        throw Errors(InvalidUID,"unable to convert "+hexuid+" into two 32 bits unsigned long UID");
     string uidValStr = hexuid.substr(0,8);
     string uidStr = hexuid.substr(8,16);
     uint32_t uidValidity = stoul(uidValStr, 0, 16);
@@ -54,23 +64,18 @@ pair<uint32_t,uint32_t> CpmManager::hexStringtoIntUIDs(string hexuid){
     return pair<uint32_t,uint32_t>(uidValidity,uid);
 }
 
-void CpmManager::scan() {
-    StorageCpmObject::scan();
-    if (nextUID==1 and not cpmObjectUIDList.empty()) {
-        set<uint32_t>::iterator firstUID = cpmObjectUIDList.begin();
-        nextUID = *firstUID;
-        cpmObjectUIDList.erase(firstUID);
-        filesystem::remove(getPath()+UIDstoHexString(make_pair(getUID(), *firstUID)));
+string CpmManager::folderPathCheck(string path){
+    if (not filesystem::exists(path) or not filesystem::is_directory(path))
+        throw Errors(WrongPath, "error in trying to read-write files at this path : " + path);
+    int sepIndex = path.length()-(sizeof(PATH_SEP)/sizeof(char) -1);
+    if (path.substr(sepIndex) == PATH_SEP) {
+        path = path.substr(0,sepIndex);
     }
-}
-
-uint32_t CpmManager::append(shared_ptr<CpmObject> cpmObject) {
-    if (nextUID==1) scan();
-    return StorageCpmObject::append(cpmObject);
+    return path;
 }
 
 string CpmManager::write(shared_ptr<CpmObject> cpmObject){
-    try {cpmObject->isComplete();} catch(Errors const &e) {throw(Errors(e,"error in writing a CpmObject"));}
+    if (not cpmObject->isComplete()) throw(Errors(IncompleteCpmObject, "error writing CPM Object"));
     string path = cpmObject->getPath();
     if (dynamic_pointer_cast<StorageCpmObject>(cpmObject)) {
         filesystem::create_directory(path);
@@ -83,13 +88,14 @@ string CpmManager::write(shared_ptr<CpmObject> cpmObject){
         ofstream newFile(path);
         newFile << cpmObject->preview();
         newFile.close();
-        try {
-            cpmObject->checkWritingIntegrity();
-        } catch (Errors const &e) {
-            throw e;
-            //if (e.getCode() == ContentUnequality) throw Errors(e,"error in checking the writing integrity of the object");
-        }
     }
+    try {
+        cpmObject->checkWritingIntegrity();
+    } catch (Errors const &e) {
+        throw e;
+        //if (e.getCode() == ContentUnequality) throw Errors(e,"error in checking the writing integrity of the object");
+    }
+
     return path;
 }
 
@@ -100,7 +106,7 @@ shared_ptr<CpmObject> CpmManager::read(string path){
     if (path.substr(path.length() -1) == PATH_SEP) path.pop_back();
     string name = path.substr(path.find_last_of(PATH_SEP) +1);
     if (name.find("_") != string::npos) {
-        pair<uint32_t, uint32_t> uids = hexStringtoIntUIDs(name);
+        pair<uint32_t, uint32_t> uids = hexStringtoIntUIDs(name.substr(0,16));
         ++uids.second;
         string nextUIDtoString = UIDstoHexString(uids);
         try {
@@ -115,7 +121,7 @@ shared_ptr<CpmObject> CpmManager::read(string path){
             } else return make_shared<ConversationHistory>(name.substr(name.find("_") +1));
         } catch(Errors const &e) {
             if (e.getCode() != WrongPath) throw e;
-            return make_shared<ConversationHistory>(name.substr(name.find("_") +1));
+            return make_shared<ConversationHistory>(name.substr(17));
         }
     }
     

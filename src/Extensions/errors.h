@@ -18,7 +18,9 @@ enum codeError {
     IDsUnequality = 7,
     ContentUnequality = 8,
     CacheUnequality = 9,
-    InvalidUID = 10
+    InvalidUID = 10,
+    UIDValidityError = 11,
+    NameError = 12
 };
 
 class Errors: public exception {
@@ -34,6 +36,7 @@ public:
 private:
     int mCode;
     string mErrorCplm;
+    string exceptionMessage;
     
     static vector<string> exceptList;
 };

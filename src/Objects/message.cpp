@@ -2,6 +2,8 @@
 #include "errors.h"
 #include "cpmmanager.h"
 
+log4cxx::LoggerPtr Message::loggerMessage(Logger::getLogger(objectType));
+
 Message::Message() {}
 Message::Message(map<string,string> headers_map, string body) : message_body(body) {
     headers.setHeaders(headers_map);}
@@ -30,7 +32,7 @@ bool Message::checkWritingIntegrity() {
 
 
 bool Message::isComplete(){
-    if (not headers.isComplete()) throw Errors(IncompleteCpmObject, headers.headersCompletionExcept);
-    return true;
+    if (not headers.isComplete()) LOG4CXX_INFO(loggerMessage, "check object completion : " << headers.headersCompletionExcept);
+    return headers.isComplete();
 }
 

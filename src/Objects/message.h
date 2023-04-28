@@ -25,6 +25,7 @@ class Message : public CpmObject {
     private :
     
     virtual const string& getObjectType();
+    static log4cxx::LoggerPtr loggerMessage;
     
 };
 
