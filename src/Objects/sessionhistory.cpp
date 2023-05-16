@@ -22,18 +22,22 @@ void SessionHistory::setSessionInfo(SessionInfo &sessionInfo) {
     this->sessionInfo = make_shared<SessionInfo>(sessionInfo);
 }
 
+void SessionHistory::setGroupState(GroupState &groupState) {
+    this->groupState = make_shared<GroupState>(groupState);
+}
+
 bool SessionHistory::checkWritingIntegrity() {
     sessionInfo->checkWritingIntegrity();
     return StorageCpmObject::checkWritingIntegrity();
 }
 bool SessionHistory::isComplete(){
-    if (sessionInfo->isComplete()) {
-        sessionInfo->mParent = shared_from_this();
-        sessionInfo->UID = getNextUID();
-        NAME = sessionInfo->headers.CONTRIBUTION_ID;
-        return true;
-    }
-    return false;
+    if (not sessionInfo->isComplete()) return false;
+    sessionInfo->mParent = shared_from_this();
+    sessionInfo->UID = getNextUID();
+    NAME = sessionInfo->headers.CONTRIBUTION_ID;
+    groupState->mParent = shared_from_this();
+    groupState->UID = getNextUID();
+    return true;
 }
 
 

@@ -7,6 +7,8 @@
 #include "groupstate.h"
 #include "cpmmanager.h"
 #include "errors.h"
+#include <sys/stat.h>
+#include <unistd.h>
 
 const string CpmObject::mUnknownString = "Unknown";
 
@@ -16,21 +18,27 @@ CpmObject::CpmObject() {}
 CpmObject::CpmObject(CpmObject &copy) {}
 CpmObject::~CpmObject() {}
 
-const uint32_t CpmObject::getUID() { return UID;}
+const uint32_t CpmObject::getUID() { 
+    if (not mParent.lock()) throw Errors(UnlinkedCpmObject, "unable to get the UID of this CPM Object because it does not have one");
+    return UID;
+}
 
 const string CpmObject::getFolderName() {
     shared_ptr<StorageCpmObject> parent = mParent.lock();
-    return (parent?parent->getName():mUnknownString);
+    if (not parent) throw Errors(UnlinkedCpmObject, "unable to get the folder name of this CPM Object because it does not have one");
+    return parent->getName();
 }
 const uint32_t CpmObject::getUIDValidity() {
     shared_ptr<StorageCpmObject> parent = mParent.lock();
+    if (not parent) throw Errors(UnlinkedCpmObject, "unable to get the UID validity of this CPM Object because it does not have one");
     return (parent?parent->getUID():0);
 }
 
 string CpmObject::getPath(){
     shared_ptr<StorageCpmObject> parent = mParent.lock();
-    return parent?parent->getPath()+UIDstoHexString():throw Errors(UnlinkedCpmObject, "error while asking the Cpm Object path");
+    return parent?parent->getPath()+PATH_SEP+UIDstoHexString():throw Errors(UnlinkedCpmObject, "unable to get the path of this CPM Object because it does not have one");
 }
+
 
 string CpmObject::UIDstoHexString(){
     return CpmManager::UIDstoHexString(make_pair(getUIDValidity(), getUID()));
@@ -53,26 +61,12 @@ const string& CpmObject::getObjectType() {
     return objectType;
 }
 
-string CpmObject::folderPathCheck(string path){
-    ifstream pathCheck(path);
-    if (not pathCheck)
-        throw Errors(WrongPath, "error in trying to read-write files at this path : " + path);
-    if (path.substr(path.length()-1) != PATH_SEP) {
-        path = path + PATH_SEP;
-    }
-    return path;
-}
-
 bool CpmObject::checkWritingIntegrity() {
-    string path = getPath();
-    int sepSize = sizeof(PATH_SEP)/sizeof(char) -1;
-    if (path.rfind(PATH_SEP) == path.length()-sepSize) path.pop_back();
-    size_t sep_pos1 = path.rfind(PATH_SEP);
-    size_t sep_pos2 = path.rfind(PATH_SEP, sep_pos1 -1) + sepSize;
-    string name = path.substr(sep_pos1 + sepSize);
-    string folderName = path.substr(sep_pos2, sep_pos1-sep_pos2);
+    filesystem::path path = getPath();
+    string name = path.filename();
+    string folderName = path.parent_path().filename();
     if (folderName.find_first_not_of("0123456789abcdef_") >= 17) folderName.erase(0,17);
-    pair<uint32_t,uint32_t> uids = CpmManager::hexStringtoIntUIDs(name);
+    pair<uint32_t,uint32_t> uids = CpmManager::hexStringtoIntUIDs(name.substr(0,16));
     if (UID != uids.second or getUIDValidity() != uids.first or getFolderName() != folderName)
         throw Errors(IDsUnequality);
     return true;
